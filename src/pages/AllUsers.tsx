@@ -102,7 +102,7 @@ const AllUsers = () => {
 
   return (
     <Layout>
-      <div className="all-users-page">
+      <div className="all-users-page sm:p-10 p-2 overflow-auto">
         {/* Header */}
         <div className="header">
           <div className="header-content">
@@ -110,40 +110,42 @@ const AllUsers = () => {
             <p>You have total {users.length} users.</p>
           </div>
           <div className="header-actions">
-            <Button>
-              <Upload className="lucide-icon export-icon" /> Export
+            <Button >
+              <Upload className="lucide-icon export-icon w-4"  /> Export
             </Button>
           </div>
         </div>
 
         {/* Controls */}
-        <div className="controls">
+        <div className="grid grid-cols-3 bg-gray-100 mb-4 items-center   gap-2 w-full p-2 rounded-md">
           <Dropdown
             placeholder="Bulk Action"
             options={statusOptions}
             onSelect={handleBulkAction}
           />
-          <Button className="apply-button">Apply</Button>
-          <div className="flex-grow" />
+          <Button  >Apply</Button>
+         <div className="flex items-center justify-end gap-2">
+
           <Search className="lucide-icon control-icon" />
           <Menu className="lucide-icon control-icon" />
           <Settings className="lucide-icon control-icon" />
+         </div>
         </div>
 
         {/* Table */}
-        <div className="users-table">
-          <table>
-            <thead>
-              <tr>
-                <th><input type="checkbox" /></th>
-                <th>User</th>
-                <th>Country</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Last Sync</th>
-                <th>Verified</th>
-                <th>
-                  Action <ChevronRight className="lucide-icon table-header-icon" />
+      <div className="overflow-x-scroll w-full rounded-md ">
+          <table className="min-w-[800px] w-full text-sm">
+            <thead className="bg-[#5D40ED]  text-left">
+              <tr className=" text-white">
+                <th className="p-4"><input type="checkbox" /></th>
+                <th className="p-4">User</th>
+                <th className="p-4">Country</th>
+                <th className="p-4">Role</th>
+                <th className="p-4">Status</th>
+                <th className="p-4">Last Sync</th>
+                <th className="p-4">Verified</th>
+                <th className="p-4 ">
+                  Action 
                 </th>
               </tr>
             </thead>
@@ -151,40 +153,59 @@ const AllUsers = () => {
               {currentUsers.map((user, index) => (
                 <tr
                   key={user.id}
-                  className={index % 2 === 0 ? "table-row-even" : "table-row-odd"}
+                  className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
                 >
-                  <td><input type="checkbox" /></td>
-                  <td className="user-cell">
-                    <img src={user.avatar} alt={user.name} className="user-avatar" />
-                    <div className="user-info">
-                      <p>{user.name}</p>
-                      <p>{user.email}</p>
+                  <td className="p-2"><input type="checkbox" /></td>
+                  <td className="p-2 flex items-center gap-3">
+                    <img
+                      src={user.avatar}
+                      alt={user.name}
+                      className="w-10 h-10 rounded-full object-cover"
+                    />
+                    <div className="flex flex-col">
+                      <p className="font-medium">{user.name}</p>
+                      <p className="text-xs text-gray-500">{user.email}</p>
                     </div>
                   </td>
-                  <td>
-                    <img src={USflag} alt={`${user.country} Flag`} className="country-flag" />
+                  <td className="p-2">
+                    <img
+                      src={USflag}
+                      alt={`${user.country} Flag`}
+                      className="w-6 h-6  object-contain"
+                    />
                   </td>
-                  <td>{user.role}</td>
-                  <td>
-                    <span className={`status-badge status-${user.status.toLowerCase()}`}>
+                  <td className="p-2">{user.role}</td>
+                  <td className="p-2">
+                    <span
+                      className={`text-xs px-2 font-semibold py-1 rounded-full ${
+                        user.status === "Active"
+                          ? "bg-green-100 text-green-700"
+                          : user.status === "Inactive"
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
                       {user.status}
                     </span>
                   </td>
-                  <td>{user.lastSync}</td>
-                  <td>
+                  <td className="p-2">{user.lastSync}</td>
+                  <td className="p-2 ">
                     {["email", "kyc"].map((type) => (
-                      <span className="verified-status" key={type}>
+                      <span
+                        className="flex items-center gap-1 pb-1 text-xs text-gray-700"
+                        key={type}
+                      >
                         {user.verified[type as keyof VerifiedStatus] ? (
-                          <CheckCircle className="lucide-icon check-icon" />
+                          <CheckCircle className="text-green-500" size={16} />
                         ) : (
-                          <X className="lucide-icon x-icon" />
-                        )}{" "}
+                          <X className="text-red-500" size={16} />
+                        )}
                         {type.toUpperCase()}
                       </span>
                     ))}
                   </td>
-                  <td>
-                    <MoreHorizontal className="lucide-icon" />
+                  <td className="p-2">
+                    <MoreHorizontal className="text-gray-500" />
                   </td>
                 </tr>
               ))}
@@ -193,22 +214,37 @@ const AllUsers = () => {
         </div>
 
         {/* Pagination */}
-        <div className="pagination">
-          <span>Rows per page:</span>
-          <Dropdown
-            placeholder={usersPerPage.toString()}
-            options={rowsPerPageOptions}
-            onSelect={handleRowsPerPageChange}
-          />
-          <span>
-            {`${indexOfFirstUser + 1} - ${Math.min(indexOfLastUser, users.length)} of ${users.length}`}
-          </span>
-          <Button onClick={handlePrevPage} disabled={currentPage === 1}>
-            <ChevronLeft className="lucide-icon" />
-          </Button>
-          <Button onClick={handleNextPage} disabled={currentPage === totalPages}>
-            <ChevronRight className="lucide-icon" />
-          </Button>
+       <div className="flex  flex-row items-center justify-between gap-3 mt-4 text-sm">
+          <div className="flex items-center gap-2">
+            <span>Rows per page:</span>
+            <Dropdown
+              placeholder={usersPerPage.toString()}
+              options={rowsPerPageOptions}
+              onSelect={handleRowsPerPageChange}
+            />
+          </div>
+          <div className="flex items-center  gap-2">
+            <span className="w-full">
+              {`${indexOfFirstUser + 1} - ${Math.min(
+                indexOfLastUser,
+                users.length
+              )} of ${users.length}`}
+            </span>
+            <Button
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+              className="px-2"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </Button>
+            <Button
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+              className="px-2"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
       </div>
     </Layout>
@@ -216,3 +252,66 @@ const AllUsers = () => {
 };
 
 export default AllUsers;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

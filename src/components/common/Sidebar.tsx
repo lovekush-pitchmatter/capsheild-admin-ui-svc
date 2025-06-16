@@ -24,13 +24,15 @@ const sidebarData: SidebarSection[] = [
   {
     type: "main",
     name: "MAIN",
-    items: [{ name: "Dashboard", icon: HomeIcon, to: "/dashboard" }],
+    items: [{ name: "Dashboard", icon: HomeIcon, to: "/" }],
   },
   {
     type: "heading",
     name: "USER MANAGEMENT",
     items: [
       { name: "General", icon: HomeIcon, to: "/user/general" },
+      { name: "User", icon: HomeIcon, to: "/user/users" },
+      { name: "User Details", icon: HomeIcon, to: "/user/user-details" },
       { name: "Reports & Insights", icon: HomeIcon, to: "/user/reports" },
       { name: "Communication", icon: HomeIcon, to: "/user/communication" },
     ],

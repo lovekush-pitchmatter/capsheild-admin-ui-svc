@@ -166,7 +166,7 @@ function Dropdown({
       >
         <button
           onClick={toggleDropdown}
-          className="dropdown-header"
+          className="dropdown-header flex items-center  gap-2"
           disabled={disabled}
         >
           {displayValue()}

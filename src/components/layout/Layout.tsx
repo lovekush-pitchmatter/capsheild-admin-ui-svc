@@ -18,7 +18,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         userDesignation="Admin Manager"
         onMenuClick={() => setIsSidebarOpen((prev) => !prev)}
       />
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-auto">
         <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
         {children}
       </div>
