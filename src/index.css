@@ -712,6 +712,7 @@ html,body {
   flex-direction: column;
   padding: 24px;
   gap: 24px;
+  width: 100%;
   background-color: #f9fafb; /* Light grey background for the page */
   padding-bottom: 48px; /* Add extra space at the bottom */
 }

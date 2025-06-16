@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import RightLogo from "../assets/right_logo.png";
 import LoginLeft from "../components/LoginLeft";
 import { Link } from "react-router-dom";
 
-const ForgetPassword = () => {
-  const [email, setEmail] = useState("");
+const ForgetPassword: React.FC = () => {
+  const [email, setEmail] = useState<string>("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Trigger password reset logic (send email etc.)
     console.log("Reset link sent to:", email);
@@ -34,18 +33,20 @@ const ForgetPassword = () => {
             name="email"
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setEmail(e.target.value)
+            }
             placeholder="Enter your username or email"
           />
 
           <p className="text-sm my-6 text-center text-gray-600 font-semibold">
             Remember your password?{" "}
-            <Link to="/login" className="text hover:underline ">
+            <Link to="/login" className="text hover:underline">
               Login here
             </Link>
           </p>
 
-          <Button type="submit" className="mt-4">
+          <Button  className="mt-4">
             Reset Password
           </Button>
         </form>

@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { ChevronLeft, UserCircle, Eye, User } from 'lucide-react';
 import Dropdown from '../components/Dropdown';
 import Input from '../components/Input';
-import Button from '../components/Button';
-import Header from "../components/common/Header";
-import Sidebar from "../components/common/Sidebar";
-import Footer from "../components/common/Footer";
+import Button from '../components/Button'; 
+import Layout from '../components/layout/Layout';
 
 interface Transaction {
   id: string;
@@ -16,8 +14,7 @@ interface Transaction {
   date: string;
 }
 
-const UserDetails: React.FC = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+const UserDetails: React.FC = () => { 
   const [isProfileSuspended, setIsProfileSuspended] = useState(false);
   const [selectedGender, setSelectedGender] = useState<string | number>('male');
   const [selectedProfession, setSelectedProfession] = useState<string | number>('marketing_specialist');
@@ -117,6 +114,7 @@ const UserDetails: React.FC = () => {
   ];
 
   return (
+   < Layout>
     <div className="user-details-page pb-20">
       <div className="user-details-header">
         <div className="user-title-section">
@@ -345,6 +343,7 @@ const UserDetails: React.FC = () => {
         </div>
       )}
     </div>
+   </Layout>
   );
 };
 
