@@ -242,7 +242,7 @@ html,body {
 .all-users-page {
   background-color: #f9fafb; /* Set to light grey to match desired UI whitespace */
   border-radius: 12px; /* Rounded corners for the entire page content */
-  padding: 24px; /* Padding inside the page container */
+ 
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
   flex-grow: 1; /* Allow it to take up available space */
   display: flex;
@@ -279,7 +279,7 @@ html,body {
 
 .header-actions {
   display: flex;
-  align-items: center;
+  align-items: center; 
 }
 
 
@@ -712,6 +712,7 @@ html,body {
   flex-direction: column;
   padding: 24px;
   gap: 24px;
+  width: 100%;
   background-color: #f9fafb; /* Light grey background for the page */
   padding-bottom: 48px; /* Add extra space at the bottom */
 }

@@ -16,7 +16,7 @@ function Button({ children, onClick, className, disabled, variant }: ButtonProps
       : "w-full bg text-white py-2 rounded-lg";
 
   return (
-    <button onClick={onClick} className={`${baseStyle} ${variantStyle} ${className || ''}`} disabled={disabled}>
+    <button onClick={onClick} className={`${baseStyle} ${variantStyle} ${className || 'flex items-center justify-center gap-2 cursor-pointer px-2 w-auto'}`} disabled={disabled}>
       {children}
     </button>
   );

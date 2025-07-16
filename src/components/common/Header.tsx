@@ -56,8 +56,8 @@ const Header: React.FC<HeaderProps> = ({ userImage, userName, userDesignation, o
       {/* Left Section: Logo, Hamburger, Search */}
       <div className="flex items-center flex-grow">
         {/* Logo with divider */}
-        <div className="flex items-center justify-between gap-4 pr-12 border-r border-[#E0E0E0]">
-          <img src={Logo} alt="Logo" className="h-[20px]" />
+        <div className="flex items-center justify-between gap-4 pr-2 border-r border-[#E0E0E0]">
+          <img src={Logo} alt="Logo" className="w-60"/>
         </div>
 
         {/* Mobile Hamburger Menu (visible only on small screens) */}
@@ -83,7 +83,7 @@ const Header: React.FC<HeaderProps> = ({ userImage, userName, userDesignation, o
         </button>
 
         {/* Search Bar */}
-        <div className="hidden lg:block w-[333px] ml-5">
+        <div className="hidden lg:block w-[280px] ml-5">
           <div className="flex items-center px-4 py-2 border border-[#94949B] rounded-[10px] h-[37px]">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#6C757D" strokeWidth="1.66678" strokeLinecap="round" strokeLinejoin="round"/>
@@ -99,9 +99,9 @@ const Header: React.FC<HeaderProps> = ({ userImage, userName, userDesignation, o
       </div>
 
       {/* Right Section: Icons + User */}
-      <div className="flex items-center gap-x-2 sm:gap-x-4">
+      <div className="flex items-center gap-2">
         {/* Icons */}
-        <div className="hidden sm:flex items-center gap-x-2 sm:gap-x-4 lg:gap-x-8">
+        <div className="hidden sm:flex items-center gap-2 sm:gap-4 ">
           {/* Flag Dropdown */}
           <div className="relative">
             <div onClick={() => setShowFlagDropdown(!showFlagDropdown)} className="cursor-pointer">
@@ -132,7 +132,7 @@ const Header: React.FC<HeaderProps> = ({ userImage, userName, userDesignation, o
           {/* Sun Icon */}
           <div onClick={() => setIsMoon(!isMoon)} className="cursor-pointer">
             {isMoon ? (
-              <svg enable-background="new 0 0 512 512" height="45px" id="Layer_1" version="1.1" viewBox="0 0 512 512" width="35px" xmlns="http://www.w3.org/2000/svg">
+              <svg enable-background="new 0 0 512 512" height="28" id="Layer_1" version="1.1" viewBox="0 0 512 512" width="28" xmlns="http://www.w3.org/2000/svg">
                 <path d="M349.852,343.15c-49.875,49.916-131.083,49.916-181,0c-49.916-49.918-49.916-131.125,0-181.021  c13.209-13.187,29.312-23.25,47.832-29.812c5.834-2.042,12.293-0.562,16.625,3.792c4.376,4.375,5.855,10.833,3.793,16.625  c-12.542,35.375-4,73.666,22.25,99.917c26.209,26.228,64.5,34.75,99.916,22.25c5.792-2.062,12.271-0.582,16.625,3.793  c4.376,4.332,5.834,10.812,3.771,16.625C373.143,313.838,363.06,329.941,349.852,343.15z M191.477,184.754  c-37.438,37.438-37.438,98.354,0,135.771c40,40.021,108.125,36.416,143-8.168c-35.959,2.25-71.375-10.729-97.75-37.084  c-26.375-26.354-39.333-61.771-37.084-97.729C196.769,179.796,194.039,182.192,191.477,184.754z" fill="#5D40ED"/>
               </svg>
             ) : (
