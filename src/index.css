@@ -1,17 +1,18 @@
-@import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
 
 html,body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 .roboto-font {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 .text {
-  @apply text-[#5D40ED]
+  @apply text-[#5D40ED];
 }
 .bg {
-  @apply bg-[#5D40ED]
+  @apply bg-[#5D40ED];
 }
 .sidebar {
   width: 260px;
