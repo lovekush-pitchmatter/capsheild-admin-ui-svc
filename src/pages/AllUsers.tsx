@@ -1,317 +1,324 @@
-import { useState } from "react";
-import Dropdown, { DropdownOption } from "../components/Dropdown.tsx";
-import Button from "../components/Button.tsx";
-import USflag from "../assets/images/USflag.png";
-import AshleyAvatar from "../assets/images/ashley.png";
-import SamuelAvatar from "../assets/images/samuel.png";
-import Layout from "../components/layout/Layout.tsx";
-import {
-  CheckCircle,
-  X,
-  MoreHorizontal,
-  Upload,
-  Search,
-  Menu,
-  Settings,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import React, { useState } from 'react';
+import { Search, Filter, Bell, User, Settings, ChevronDown, MoreHorizontal, Circle } from 'lucide-react';
 
-// User type
-interface VerifiedStatus {
-  email: boolean;
-  kyc: boolean;
-}
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  avatar: string;
-  country: string;
-  role: string;
-  status: "Active" | "Inactive" | "Suspended";
-  lastSync: string;
-  verified: VerifiedStatus;
-}
 
-const initialUsers: User[] = [
-  {
-    id: 1,
-    name: "Ashley Lawson",
-    email: "ashley@softnio.com",
-    avatar: AshleyAvatar,
-    country: "🇺🇸",
-    role: "Investor",
-    status: "Active",
-    lastSync: "2024-10-30",
-    verified: { email: true, kyc: true },
-  },
-  {
-    id: 2,
-    name: "Jane Montgomery",
-    email: "jane84@example.com",
-    avatar: SamuelAvatar,
-    country: "🇺🇸",
-    role: "Startup Founder",
-    status: "Suspended",
-    lastSync: "2024-10-28",
-    verified: { email: true, kyc: false },
-  },
-];
 
 const AllUsers = () => {
   const [users] = useState<User[]>(initialUsers);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage, setUsersPerPage] = useState(10);
+  const usersPerPage = 5;
 
+  const totalPages = Math.ceil(users.length / usersPerPage);
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-  const totalPages = Math.ceil(users.length / usersPerPage);
 
-  const handleNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-  };
 
-  const handlePrevPage = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
-  };
+// const AllUsers = () => {
+//   const [users] = useState<User[]>(initialUsers);
+//   const [currentPage, setCurrentPage] = useState(1);
+//   const [usersPerPage, setUsersPerPage] = useState(10);
 
-  const handleRowsPerPageChange = (option: DropdownOption<number>) => {
-    setUsersPerPage(option.value);
-    setCurrentPage(1);
-  };
 
-  const handleBulkAction = (option: DropdownOption) => {
-    console.log("Bulk action selected:", option.value);
-    // Optional: filter or apply status
-  };
 
-  const statusOptions: DropdownOption[] = [
-    { label: "Active", value: "Active" },
-    { label: "Inactive", value: "Inactive" },
-    { label: "Suspended", value: "Suspended" },
+// const CAPShieldAdminPanel = () => {
+//   const [selectedMenu, setSelectedMenu] = useState('All Users');
+
+  // const menuItems = [
+  //   'All Users',
+  //   'KYC Verification',
+  //   'Referrals & Opinion',
+  //   'Classification Status',
+  //   'User Address Log',
+  //   'Add Fund',
+  //   'Deduct Fund',
+  //   'Blocked Users'
+  // ];
+
+  const users = [
+    {
+      id: '01',
+      username: 'abayomina',
+      fullName: 'Abay Princess',
+      country: 'Nigeria',
+      referredBy: 'promotional',
+      email: '•',
+      mobile: '•',
+      status: 'KYC',
+      joinedOn: '29 Jan 2024',
+      action: '⚙️'
+    },
+    {
+      id: '02',
+      username: 'sonnistock',
+      fullName: 'Aristotle Onisk',
+      country: 'Japan',
+      referredBy: 'promotional',
+      email: '•',
+      mobile: '•',
+      status: 'KYC',
+      joinedOn: '29 Jan 2024',
+      action: '⚙️'
+    },
+    {
+      id: '03',
+      username: 'chrishroud',
+      fullName: 'Ernest Reynolds',
+      country: 'USA',
+      referredBy: 'organicsearchsme',
+      email: '•',
+      mobile: '•',
+      status: 'KYC',
+      joinedOn: '27 Jan 2024',
+      action: '⚙️'
+    },
+    {
+      id: '04',
+      username: 'enriquemarq',
+      fullName: 'Enrique Perez',
+      country: 'Spain',
+      referredBy: 'organicsearchsme',
+      email: '•',
+      mobile: '•',
+      status: 'KYC',
+      joinedOn: '28 Jan 2024',
+      action: '⚙️'
+    },
+    {
+      id: '05',
+      username: 'lexitalexander',
+      fullName: 'Lexie Alexander',
+      country: 'Australia',
+      referredBy: 'promotional',
+      email: '•',
+      mobile: '•',
+      status: 'Rejected',
+      joinedOn: '15 Mar 2024',
+      action: '⚙️'
+    }
   ];
 
-  const rowsPerPageOptions: DropdownOption<number>[] = [
-    { label: "5", value: 5 },
-    { label: "10", value: 10 },
-    { label: "20", value: 20 },
+  const stats = [
+    { label: 'All Users', value: '115', change: '+10% this week', color: 'text-orange-500' },
+    { label: 'KYC Users', value: '300', change: '+8% this week', color: 'text-blue-500' },
+    { label: 'KYC Verified', value: '1500', change: '+19% this week', color: 'text-purple-500' },
+    { label: 'Compromised Users', value: '200', change: '+3% this week', color: 'text-pink-500' },
+    { label: 'Penalty Reports', value: '1,276', change: '+12% this week', color: 'text-green-500' }
   ];
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'KYC': return 'text-green-500';
+      case 'Rejected': return 'text-red-500';
+      default: return 'text-gray-500';
+    }
+  };
+
+  const getStatusDot = (status) => {
+    switch (status) {
+      case 'KYC': return 'bg-green-500';
+      case 'Rejected': return 'bg-red-500';
+      default: return 'bg-gray-500';
+    }
+  };
 
   return (
-    <Layout>
-      <div className="all-users-page sm:p-10 p-2 overflow-auto">
+    <div className="min-h-screen bg-gray-50 flex">
+      {/* Sidebar */}
+      <div className="w-64 bg-white shadow-sm border-r">
+        <div className="p-4">
+          <div className="flex items-center space-x-2 mb-8">
+            <div className="w-8 h-8 bg-purple-600 rounded flex items-center justify-center">
+              <span className="text-white font-bold text-sm">C</span>
+            </div>
+            <span className="font-semibold text-gray-900">CAPShield</span>
+          </div>
+          
+          {/* <nav className="space-y-1">
+            {menuItems.map((item) => (
+              <button
+                key={item}
+                onClick={() => setSelectedMenu(item)}
+                className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
+                  selectedMenu === item
+                    ? 'bg-purple-600 text-white'
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                {item}
+              </button>
+            ))}
+          </nav> */}
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1">
         {/* Header */}
-        <div className="header">
-          <div className="header-content">
-            <h1>All users</h1>
-            <p>You have total {users.length} users.</p>
+        <header className="bg-white shadow-sm border-b px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <h1 className="text-xl font-semibold text-gray-900">All Users</h1>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                />
+              </div>
+              <button className="p-2 text-gray-400 hover:text-gray-600">
+                <Bell className="w-5 h-5" />
+              </button>
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm font-medium">A</span>
+                </div>
+                <ChevronDown className="w-4 h-4 text-gray-400" />
+              </div>
+            </div>
           </div>
-          <div className="header-actions">
-            <Button >
-              <Upload className="lucide-icon export-icon w-4"  /> Export
-            </Button>
+        </header>
+
+        {/* Stats Cards */}
+        <div className="p-6">
+          <div className="grid grid-cols-5 gap-4 mb-6">
+            {stats.map((stat, index) => (
+              <div key={index} className="bg-white p-4 rounded-lg shadow-sm border">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-2xl font-bold text-gray-900">{stat.value}</span>
+                  <div className={`w-3 h-3 rounded-full ${stat.color.replace('text-', 'bg-')}`}></div>
+                </div>
+                <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
+                <p className="text-xs text-gray-500">{stat.change}</p>
+              </div>
+            ))}
           </div>
-        </div>
 
-        {/* Controls */}
-        <div className="grid grid-cols-3 bg-gray-100 mb-4 items-center   gap-2 w-full p-2 rounded-md">
-          <Dropdown
-            placeholder="Bulk Action"
-            options={statusOptions}
-            onSelect={handleBulkAction}
-          />
-          <Button  >Apply</Button>
-         <div className="flex items-center justify-end gap-2">
+          {/* Filters */}
+          <div className="bg-white rounded-lg shadow-sm border mb-4">
+            <div className="p-4 border-b">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm text-gray-600">Filter</span>
+                    <button className="flex items-center space-x-1 px-3 py-1 border border-gray-300 rounded text-sm">
+                      <span>KYC Status</span>
+                      <ChevronDown className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm text-gray-600">Transfer Type</span>
+                    <button className="flex items-center space-x-1 px-3 py-1 border border-gray-300 rounded text-sm">
+                      <span>All</span>
+                      <ChevronDown className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm text-gray-600">Referral Source</span>
+                    <button className="flex items-center space-x-1 px-3 py-1 border border-gray-300 rounded text-sm">
+                      <span>All</span>
+                      <ChevronDown className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+                <button className="flex items-center space-x-1 bg-purple-600 text-white px-4 py-2 rounded text-sm">
+                  <Filter className="w-4 h-4" />
+                  <span>Filters</span>
+                </button>
+              </div>
+            </div>
 
-          <Search className="lucide-icon control-icon" />
-          <Menu className="lucide-icon control-icon" />
-          <Settings className="lucide-icon control-icon" />
-         </div>
-        </div>
+            {/* Table */}
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <input type="checkbox" className="rounded" />
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SL No.</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Full Name</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Country</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Referred By</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mobile</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">KYC</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joined On</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {users.map((user, index) => (
+                    <tr key={user.id} className="hover:bg-gray-50">
+                      <td className="px-4 py-3">
+                        <input type="checkbox" className="rounded" />
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-900">{user.id}</td>
+                      <td className="px-4 py-3 text-sm text-blue-600">{user.username}</td>
+                      <td className="px-4 py-3 text-sm text-gray-900">
+                        <div className="flex items-center space-x-2">
+                          <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center">
+                            <span className="text-xs text-purple-600">{user.fullName.charAt(0)}</span>
+                          </div>
+                          <span>{user.fullName}</span>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-900">{user.country}</td>
+                      <td className="px-4 py-3 text-sm text-gray-600">{user.referredBy}</td>
+                      <td className="px-4 py-3 text-center">
+                        <div className={`w-2 h-2 rounded-full ${user.email === '•' ? 'bg-green-500' : 'bg-red-500'} mx-auto`}></div>
+                      </td>
+                      <td className="px-4 py-3 text-center">
+                        <div className={`w-2 h-2 rounded-full ${user.mobile === '•' ? 'bg-green-500' : 'bg-red-500'} mx-auto`}></div>
+                      </td>
+                      <td className="px-4 py-3 text-center">
+                        <div className={`w-2 h-2 rounded-full ${getStatusDot(user.status)} mx-auto`}></div>
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                          user.status === 'KYC' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                        }`}>
+                          {user.status}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-500">{user.joinedOn}</td>
+                      <td className="px-4 py-3">
+                        <button className="text-gray-400 hover:text-gray-600">
+                          <MoreHorizontal className="w-4 h-4" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-        {/* Table */}
-      <div className="overflow-x-scroll w-full rounded-md ">
-          <table className="min-w-[800px] w-full text-sm">
-            <thead className="bg-[#5D40ED]  text-left">
-              <tr className=" text-white">
-                <th className="p-4"><input type="checkbox" /></th>
-                <th className="p-4">User</th>
-                <th className="p-4">Country</th>
-                <th className="p-4">Role</th>
-                <th className="p-4">Status</th>
-                <th className="p-4">Last Sync</th>
-                <th className="p-4">Verified</th>
-                <th className="p-4 ">
-                  Action 
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentUsers.map((user, index) => (
-                <tr
-                  key={user.id}
-                  className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
-                >
-                  <td className="p-2"><input type="checkbox" /></td>
-                  <td className="p-2 flex items-center gap-3">
-                    <img
-                      src={user.avatar}
-                      alt={user.name}
-                      className="w-10 h-10 rounded-full object-cover"
-                    />
-                    <div className="flex flex-col">
-                      <p className="font-medium">{user.name}</p>
-                      <p className="text-xs text-gray-500">{user.email}</p>
-                    </div>
-                  </td>
-                  <td className="p-2">
-                    <img
-                      src={USflag}
-                      alt={`${user.country} Flag`}
-                      className="w-6 h-6  object-contain"
-                    />
-                  </td>
-                  <td className="p-2">{user.role}</td>
-                  <td className="p-2">
-                    <span
-                      className={`text-xs px-2 font-semibold py-1 rounded-full ${
-                        user.status === "Active"
-                          ? "bg-green-100 text-green-700"
-                          : user.status === "Inactive"
-                          ? "bg-yellow-100 text-yellow-700"
-                          : "bg-red-100 text-red-700"
-                      }`}
-                    >
-                      {user.status}
-                    </span>
-                  </td>
-                  <td className="p-2">{user.lastSync}</td>
-                  <td className="p-2 ">
-                    {["email", "kyc"].map((type) => (
-                      <span
-                        className="flex items-center gap-1 pb-1 text-xs text-gray-700"
-                        key={type}
-                      >
-                        {user.verified[type as keyof VerifiedStatus] ? (
-                          <CheckCircle className="text-green-500" size={16} />
-                        ) : (
-                          <X className="text-red-500" size={16} />
-                        )}
-                        {type.toUpperCase()}
-                      </span>
-                    ))}
-                  </td>
-                  <td className="p-2">
-                    <MoreHorizontal className="text-gray-500" />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Pagination */}
-       <div className="flex  flex-row items-center justify-between gap-3 mt-4 text-sm">
-          <div className="flex items-center gap-2">
-            <span>Rows per page:</span>
-            <Dropdown
-              placeholder={usersPerPage.toString()}
-              options={rowsPerPageOptions}
-              onSelect={handleRowsPerPageChange}
-            />
-          </div>
-          <div className="flex items-center  gap-2">
-            <span className="w-full">
-              {`${indexOfFirstUser + 1} - ${Math.min(
-                indexOfLastUser,
-                users.length
-              )} of ${users.length}`}
-            </span>
-            <Button
-              onClick={handlePrevPage}
-              disabled={currentPage === 1}
-              className="px-2"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </Button>
-            <Button
-              onClick={handleNextPage}
-              disabled={currentPage === totalPages}
-              className="px-2"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </Button>
+            {/* Pagination */}
+            <div className="px-4 py-3 border-t border-gray-200 flex items-center justify-between">
+              <div className="text-sm text-gray-500">
+                Showing 1 to 5 of 15 entries
+              </div>
+              <div className="flex items-center space-x-2">
+                <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Previous</button>
+                <button className="px-3 py-1 bg-purple-600 text-white rounded text-sm">1</button>
+                <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">2</button>
+                <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">3</button>
+                <span className="px-2 text-gray-500">...</span>
+                <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Next</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 
-export default AllUsers;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
+export default CAPShieldAdminPanel;
