@@ -1,28 +1,44 @@
 import React, { useState } from 'react';
-import { Search, Filter, Bell, User, Settings, ChevronDown, MoreHorizontal, Circle } from 'lucide-react';
+import { Search, Filter, Bell, User, Settings, ChevronDown, MoreHorizontal, Circle, ChevronLeft,
+  ChevronRight} from 'lucide-react';
+import Layout from '../components/layout/Layout';
 
 
+interface User {
+  id: string;
+  username: string;
+  fullName: string;
+  country: string;
+  referredBy: string;
+  email: string;
+  mobile: string;
+  status: string;
+  joinedOn: string;
+  action: string;
+}
 
 
-const AllUsers = () => {
-  const [users] = useState<User[]>(initialUsers);
-  const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 5;
-
-  const totalPages = Math.ceil(users.length / usersPerPage);
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
 
 // const AllUsers = () => {
-//   const [users] = useState<User[]>(initialUsers);
+//   const [users] = useState<User[]>(sampleusers);
+//   const [currentPage, setCurrentPage] = useState(1);
+//   const usersPerPage = 5;
+
+//   const totalPages = Math.ceil(users.length / usersPerPage);
+//   const indexOfLastUser = currentPage * usersPerPage;
+//   const indexOfFirstUser = indexOfLastUser - usersPerPage;
+//   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+
+// const AllUsers = () => {
+//   const [users] = useState<User[]>(sampleusers);
 //   const [currentPage, setCurrentPage] = useState(1);
 //   const [usersPerPage, setUsersPerPage] = useState(10);
 
 
 
-// const CAPShieldAdminPanel = () => {
+// const AllUsers = () => {
 //   const [selectedMenu, setSelectedMenu] = useState('All Users');
 
   // const menuItems = [
@@ -36,68 +52,78 @@ const AllUsers = () => {
   //   'Blocked Users'
   // ];
 
-  const users = [
-    {
-      id: '01',
-      username: 'abayomina',
-      fullName: 'Abay Princess',
-      country: 'Nigeria',
-      referredBy: 'promotional',
-      email: '•',
-      mobile: '•',
-      status: 'KYC',
-      joinedOn: '29 Jan 2024',
-      action: '⚙️'
-    },
-    {
-      id: '02',
-      username: 'sonnistock',
-      fullName: 'Aristotle Onisk',
-      country: 'Japan',
-      referredBy: 'promotional',
-      email: '•',
-      mobile: '•',
-      status: 'KYC',
-      joinedOn: '29 Jan 2024',
-      action: '⚙️'
-    },
-    {
-      id: '03',
-      username: 'chrishroud',
-      fullName: 'Ernest Reynolds',
-      country: 'USA',
-      referredBy: 'organicsearchsme',
-      email: '•',
-      mobile: '•',
-      status: 'KYC',
-      joinedOn: '27 Jan 2024',
-      action: '⚙️'
-    },
-    {
-      id: '04',
-      username: 'enriquemarq',
-      fullName: 'Enrique Perez',
-      country: 'Spain',
-      referredBy: 'organicsearchsme',
-      email: '•',
-      mobile: '•',
-      status: 'KYC',
-      joinedOn: '28 Jan 2024',
-      action: '⚙️'
-    },
-    {
-      id: '05',
-      username: 'lexitalexander',
-      fullName: 'Lexie Alexander',
-      country: 'Australia',
-      referredBy: 'promotional',
-      email: '•',
-      mobile: '•',
-      status: 'Rejected',
-      joinedOn: '15 Mar 2024',
-      action: '⚙️'
-    }
-  ];
+  // const sampleusers = [
+  //   {
+  //     id: '01',
+  //     username: 'abayomina',
+  //     fullName: 'Abay Princess',
+  //     country: 'Nigeria',
+  //     referredBy: 'promotional',
+  //     email: '•',
+  //     mobile: '•',
+  //     status: 'KYC',
+  //     joinedOn: '29 Jan 2024',
+  //     action: '⚙️'
+  //   },
+  //   {
+  //     id: '02',
+  //     username: 'sonnistock',
+  //     fullName: 'Aristotle Onisk',
+  //     country: 'Japan',
+  //     referredBy: 'promotional',
+  //     email: '•',
+  //     mobile: '•',
+  //     status: 'KYC',
+  //     joinedOn: '29 Jan 2024',
+  //     action: '⚙️'
+  //   },
+  //   {
+  //     id: '03',
+  //     username: 'chrishroud',
+  //     fullName: 'Ernest Reynolds',
+  //     country: 'USA',
+  //     referredBy: 'organicsearchsme',
+  //     email: '•',
+  //     mobile: '•',
+  //     status: 'KYC',
+  //     joinedOn: '27 Jan 2024',
+  //     action: '⚙️'
+  //   },
+  //   {
+  //     id: '04',
+  //     username: 'enriquemarq',
+  //     fullName: 'Enrique Perez',
+  //     country: 'Spain',
+  //     referredBy: 'organicsearchsme',
+  //     email: '•',
+  //     mobile: '•',
+  //     status: 'KYC',
+  //     joinedOn: '28 Jan 2024',
+  //     action: '⚙️'
+  //   },
+  //   {
+  //     id: '05',
+  //     username: 'lexitalexander',
+  //     fullName: 'Lexie Alexander',
+  //     country: 'Australia',
+  //     referredBy: 'promotional',
+  //     email: '•',
+  //     mobile: '•',
+  //     status: 'Rejected',
+  //     joinedOn: '15 Mar 2024',
+  //     action: '⚙️'
+  //   }
+  // ];
+
+  const sampleusers: User[] = [
+  { id: '01', username: 'abayomina', fullName: 'Abay Princess', country: 'Nigeria', referredBy: 'promotional', email: '•', mobile: '•', status: 'KYC', joinedOn: '29 Jan 2024', action: '⚙️' },
+  { id: '02', username: 'sonnistock', fullName: 'Aristotle Onisk', country: 'Japan', referredBy: 'promotional', email: '•', mobile: '•', status: 'KYC', joinedOn: '29 Jan 2024', action: '⚙️' },
+  { id: '03', username: 'chrishroud', fullName: 'Ernest Reynolds', country: 'USA', referredBy: 'organicsearchsme', email: '•', mobile: '•', status: 'KYC', joinedOn: '27 Jan 2024', action: '⚙️' },
+  { id: '04', username: 'enriquemarq', fullName: 'Enrique Perez', country: 'Spain', referredBy: 'organicsearchsme', email: '•', mobile: '•', status: 'KYC', joinedOn: '28 Jan 2024', action: '⚙️' },
+  { id: '05', username: 'lexitalexander', fullName: 'Lexie Alexander', country: 'Australia', referredBy: 'promotional', email: '•', mobile: '•', status: 'Rejected', joinedOn: '15 Mar 2024', action: '⚙️' },
+  // Add more users if you want to test pagination better
+];
+
 
   const stats = [
     { label: 'All Users', value: '115', change: '+10% this week', color: 'text-orange-500' },
@@ -107,7 +133,83 @@ const AllUsers = () => {
     { label: 'Penalty Reports', value: '1,276', change: '+12% this week', color: 'text-green-500' }
   ];
 
-  const getStatusColor = (status) => {
+  // const getStatusColor = (status) => {
+  //   switch (status) {
+  //     case 'KYC': return 'text-green-500';
+  //     case 'Rejected': return 'text-red-500';
+  //     default: return 'text-gray-500';
+  //   }
+  // };
+
+  // const getStatusDot = (status) => {
+  //   switch (status) {
+  //     case 'KYC': return 'bg-green-500';
+  //     case 'Rejected': return 'bg-red-500';
+  //     default: return 'bg-gray-500';
+  //   }
+  // };
+
+//   const menuItems = [
+//   'All Users',
+//   'KYC Verification',
+//   'Referrals & Opinion',
+//   'Classification Status',
+//   'User Address Log',
+//   'Add Fund',
+//   'Deduct Fund',
+//   'Blocked Users',
+// ];
+
+// const AllUsers: React.FC = () => {
+//   // Sidebar selected menu
+//   const [selectedMenu, setSelectedMenu] = useState<string>('All Users');
+
+//   // User list and pagination state
+//   const [users] = useState<User[]>(sampleusers);
+//   const [currentPage, setCurrentPage] = useState<number>(1);
+//   const usersPerPage = 5;
+
+//   const totalPages = Math.ceil(users.length / usersPerPage);
+
+//   // Get users for current page
+//   const indexOfLastUser = currentPage * usersPerPage;
+//   const indexOfFirstUser = indexOfLastUser - usersPerPage;
+//   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+//   const handlePageChange = (pageNumber: number) => {
+//     if (pageNumber < 1 || pageNumber > totalPages) return;
+//     setCurrentPage(pageNumber);
+//   };
+
+const AllUsers: React.FC = () => {
+  // Just keep your local state for pagination etc.
+  const [users] = useState<User[]>(sampleusers);
+  const [currentPage, setCurrentPage] = useState(1);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+  const usersPerPage = 5;
+
+  const totalPages = Math.ceil(users.length / usersPerPage);
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  // const handlePageChange = (pageNumber: number) => {
+  //   if (pageNumber < 1 || pageNumber > totalPages) return;
+  //   setCurrentPage(pageNumber);
+  // };
+
+  const handleRowsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setRowsPerPage(parseInt(e.target.value, 10));
+    setCurrentPage(1);
+  };
+
+  const goToPage = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+  };
+
+  // Helper functions for status colors
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'KYC': return 'text-green-500';
       case 'Rejected': return 'text-red-500';
@@ -115,7 +217,7 @@ const AllUsers = () => {
     }
   };
 
-  const getStatusDot = (status) => {
+  const getStatusDot = (status: string) => {
     switch (status) {
       case 'KYC': return 'bg-green-500';
       case 'Rejected': return 'bg-red-500';
@@ -124,9 +226,10 @@ const AllUsers = () => {
   };
 
   return (
+    <Layout>
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-sm border-r">
+      {/* <div className="w-64 bg-white shadow-sm border-r">
         <div className="p-4">
           <div className="flex items-center space-x-2 mb-8">
             <div className="w-8 h-8 bg-purple-600 rounded flex items-center justify-center">
@@ -135,7 +238,7 @@ const AllUsers = () => {
             <span className="font-semibold text-gray-900">CAPShield</span>
           </div>
           
-          {/* <nav className="space-y-1">
+          <nav className="space-y-1">
             {menuItems.map((item) => (
               <button
                 key={item}
@@ -149,10 +252,13 @@ const AllUsers = () => {
                 {item}
               </button>
             ))}
-          </nav> */}
+          </nav>
         </div>
-      </div>
-
+      </div> */}
+       {/* Your table and pagination UI */}
+   {/* <main className="p-6">
+       
+      </main> */}
       {/* Main Content */}
       <div className="flex-1">
         {/* Header */}
@@ -299,6 +405,40 @@ const AllUsers = () => {
                 </tbody>
               </table>
             </div>
+{/* 
+            <div className="flex  flex-row items-center justify-between gap-3 mt-4 text-sm">
+          <div className="flex items-center gap-2">
+            <span>Rows per page:</span>
+            <Dropdown
+              placeholder={usersPerPage.toString()}
+              options={rowsPerPageOptions}
+              onSelect={handleRowsPerPageChange}
+            />
+          </div>
+          <div className="flex items-center  gap-2">
+            <span className="w-full">
+              {`${indexOfFirstUser + 1} - ${Math.min(
+                indexOfLastUser,
+                users.length
+              )} of ${users.length}`}
+            </span>
+            <Button
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+              className="px-2"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </Button>
+            <Button
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+              className="px-2"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
+      </div> */}
 
             {/* Pagination */}
             <div className="px-4 py-3 border-t border-gray-200 flex items-center justify-between">
@@ -318,7 +458,8 @@ const AllUsers = () => {
         </div>
       </div>
     </div>
+    </Layout>
   );
 };
 
-export default CAPShieldAdminPanel;
+export default AllUsers;

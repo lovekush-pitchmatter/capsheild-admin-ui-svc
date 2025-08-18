@@ -20,7 +20,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       />
       <div className="flex-1 flex overflow-auto">
         <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-        {children}
+        {/* {children} */}
+         <div className="flex-1 overflow-y-auto">
+    {children}
+  </div>
       </div>
       <Footer />
     </div>
