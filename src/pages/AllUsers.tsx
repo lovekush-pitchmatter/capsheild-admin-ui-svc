@@ -1,8 +1,21 @@
-import React, { useState } from 'react';
-import { Search, Filter, Bell, User, Settings, ChevronDown, MoreHorizontal, Circle, ChevronLeft,
-  ChevronRight} from 'lucide-react';
-import Layout from '../components/layout/Layout';
-
+import React, { useState } from "react";
+import {
+  Search,
+  Filter,
+  ChevronDown,
+  MoreHorizontal,
+  ChevronLeft,
+  ChevronRight,
+  FileDown, 
+  FileSpreadsheet, 
+  FileText, 
+  Printer
+} from "lucide-react";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+import Layout from "../components/layout/Layout";
 
 interface User {
   id: string;
@@ -17,190 +30,116 @@ interface User {
   action: string;
 }
 
-
-
-
-// const AllUsers = () => {
-//   const [users] = useState<User[]>(sampleusers);
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const usersPerPage = 5;
-
-//   const totalPages = Math.ceil(users.length / usersPerPage);
-//   const indexOfLastUser = currentPage * usersPerPage;
-//   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-//   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-
-
-// const AllUsers = () => {
-//   const [users] = useState<User[]>(sampleusers);
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const [usersPerPage, setUsersPerPage] = useState(10);
-
-
-
-// const AllUsers = () => {
-//   const [selectedMenu, setSelectedMenu] = useState('All Users');
-
-  // const menuItems = [
-  //   'All Users',
-  //   'KYC Verification',
-  //   'Referrals & Opinion',
-  //   'Classification Status',
-  //   'User Address Log',
-  //   'Add Fund',
-  //   'Deduct Fund',
-  //   'Blocked Users'
-  // ];
-
-  // const sampleusers = [
-  //   {
-  //     id: '01',
-  //     username: 'abayomina',
-  //     fullName: 'Abay Princess',
-  //     country: 'Nigeria',
-  //     referredBy: 'promotional',
-  //     email: '•',
-  //     mobile: '•',
-  //     status: 'KYC',
-  //     joinedOn: '29 Jan 2024',
-  //     action: '⚙️'
-  //   },
-  //   {
-  //     id: '02',
-  //     username: 'sonnistock',
-  //     fullName: 'Aristotle Onisk',
-  //     country: 'Japan',
-  //     referredBy: 'promotional',
-  //     email: '•',
-  //     mobile: '•',
-  //     status: 'KYC',
-  //     joinedOn: '29 Jan 2024',
-  //     action: '⚙️'
-  //   },
-  //   {
-  //     id: '03',
-  //     username: 'chrishroud',
-  //     fullName: 'Ernest Reynolds',
-  //     country: 'USA',
-  //     referredBy: 'organicsearchsme',
-  //     email: '•',
-  //     mobile: '•',
-  //     status: 'KYC',
-  //     joinedOn: '27 Jan 2024',
-  //     action: '⚙️'
-  //   },
-  //   {
-  //     id: '04',
-  //     username: 'enriquemarq',
-  //     fullName: 'Enrique Perez',
-  //     country: 'Spain',
-  //     referredBy: 'organicsearchsme',
-  //     email: '•',
-  //     mobile: '•',
-  //     status: 'KYC',
-  //     joinedOn: '28 Jan 2024',
-  //     action: '⚙️'
-  //   },
-  //   {
-  //     id: '05',
-  //     username: 'lexitalexander',
-  //     fullName: 'Lexie Alexander',
-  //     country: 'Australia',
-  //     referredBy: 'promotional',
-  //     email: '•',
-  //     mobile: '•',
-  //     status: 'Rejected',
-  //     joinedOn: '15 Mar 2024',
-  //     action: '⚙️'
-  //   }
-  // ];
-
-  const sampleusers: User[] = [
-  { id: '01', username: 'abayomina', fullName: 'Abay Princess', country: 'Nigeria', referredBy: 'promotional', email: '•', mobile: '•', status: 'KYC', joinedOn: '29 Jan 2024', action: '⚙️' },
-  { id: '02', username: 'sonnistock', fullName: 'Aristotle Onisk', country: 'Japan', referredBy: 'promotional', email: '•', mobile: '•', status: 'KYC', joinedOn: '29 Jan 2024', action: '⚙️' },
-  { id: '03', username: 'chrishroud', fullName: 'Ernest Reynolds', country: 'USA', referredBy: 'organicsearchsme', email: '•', mobile: '•', status: 'KYC', joinedOn: '27 Jan 2024', action: '⚙️' },
-  { id: '04', username: 'enriquemarq', fullName: 'Enrique Perez', country: 'Spain', referredBy: 'organicsearchsme', email: '•', mobile: '•', status: 'KYC', joinedOn: '28 Jan 2024', action: '⚙️' },
-  { id: '05', username: 'lexitalexander', fullName: 'Lexie Alexander', country: 'Australia', referredBy: 'promotional', email: '•', mobile: '•', status: 'Rejected', joinedOn: '15 Mar 2024', action: '⚙️' },
-  // Add more users if you want to test pagination better
+const sampleusers: User[] = [
+  { id: "01", username: "alinapetrova", fullName: "Alina Petrova", country: "UAE", referredBy: "eleanorpena", email: "•", mobile: "•", status: "KYC", joinedOn: "25 Jan 2024", action: "⚙️" },
+  { id: "02", username: "annetteblack", fullName: "Annette Black", country: "Japan", referredBy: "jeromebell", email: "•", mobile: "•", status: "KYC", joinedOn: "25 Jan 2024", action: "⚙️" },
+  { id: "03", username: "ronaldrichards", fullName: "Ronald Richards", country: "USA", referredBy: "cameronwilliamson", email: "•", mobile: "•", status: "KYC", joinedOn: "10 Feb 2024", action: "⚙️" },
+  { id: "04", username: "eleanorpena", fullName: "Eleanor Pena", country: "Switzerland", referredBy: "mavinmckinney", email: "•", mobile: "•", status: "KYC", joinedOn: "10 Feb 2024", action: "⚙️" },
+  { id: "05", username: "lesliealexander", fullName: "Leslie Alexander", country: "Australia", referredBy: "jeromebell", email: "•", mobile: "•", status: "Rejected", joinedOn: "15 Mar 2024", action: "⚙️" },
+  { id: "06", username: "albertflores", fullName: "Albert Flores", country: "Uk", referredBy: "annetteblack", email: "•", mobile: "•", status: "KYC", joinedOn: "15 Mar 2024", action: "⚙️" },
+  { id: "07", username: "jacobjones", fullName: "Jacob Jones", country: "India", referredBy: "Development", email: "•", mobile: "•", status: "KYC", joinedOn: "27 Apr 2024", action: "⚙️" },
+  { id: "08", username: "jeromebell", fullName: "Jerome Bell", country: "China", referredBy: "cryptoqueen", email: "•", mobile: "•", status: "KYC", joinedOn: "27 Apr 2024", action: "⚙️" },
+  { id: "09", username: "marvinmckinney", fullName: "Marvin Mckinney", country: "Canada", referredBy: "lesiealexander", email: "•", mobile: "•", status: "KYC", joinedOn: "30 Apr 2024", action: "⚙️" },
+  { id: "10", username: "cameronwilli", fullName: "Cameron Williamson", country: "India", referredBy: "annetteblack", email: "•", mobile: "•", status: "Rejected", joinedOn: "30 Apr 2024", action: "⚙️" },
 ];
 
-
-  const stats = [
-    { label: 'All Users', value: '115', change: '+10% this week', color: 'text-orange-500' },
-    { label: 'KYC Users', value: '300', change: '+8% this week', color: 'text-blue-500' },
-    { label: 'KYC Verified', value: '1500', change: '+19% this week', color: 'text-purple-500' },
-    { label: 'Compromised Users', value: '200', change: '+3% this week', color: 'text-pink-500' },
-    { label: 'Penalty Reports', value: '1,276', change: '+12% this week', color: 'text-green-500' }
-  ];
-
-  // const getStatusColor = (status) => {
-  //   switch (status) {
-  //     case 'KYC': return 'text-green-500';
-  //     case 'Rejected': return 'text-red-500';
-  //     default: return 'text-gray-500';
-  //   }
-  // };
-
-  // const getStatusDot = (status) => {
-  //   switch (status) {
-  //     case 'KYC': return 'bg-green-500';
-  //     case 'Rejected': return 'bg-red-500';
-  //     default: return 'bg-gray-500';
-  //   }
-  // };
-
-//   const menuItems = [
-//   'All Users',
-//   'KYC Verification',
-//   'Referrals & Opinion',
-//   'Classification Status',
-//   'User Address Log',
-//   'Add Fund',
-//   'Deduct Fund',
-//   'Blocked Users',
-// ];
-
-// const AllUsers: React.FC = () => {
-//   // Sidebar selected menu
-//   const [selectedMenu, setSelectedMenu] = useState<string>('All Users');
-
-//   // User list and pagination state
-//   const [users] = useState<User[]>(sampleusers);
-//   const [currentPage, setCurrentPage] = useState<number>(1);
-//   const usersPerPage = 5;
-
-//   const totalPages = Math.ceil(users.length / usersPerPage);
-
-//   // Get users for current page
-//   const indexOfLastUser = currentPage * usersPerPage;
-//   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-//   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-
-//   const handlePageChange = (pageNumber: number) => {
-//     if (pageNumber < 1 || pageNumber > totalPages) return;
-//     setCurrentPage(pageNumber);
-//   };
+const stats = [
+  { label: "Total Users", value: "115", change: "+10% this week", color: "text-orange-500" },
+  { label: "Active Users", value: "300", change: "+8% this week", color: "text-blue-500" },
+  { label: "KYC Verified", value: "1500", change: "+19% this week", color: "text-purple-500" },
+  { label: "Blocked/Flagged Users", value: "200", change: "+3% this week", color: "text-pink-500" },
+  { label: "Presale Buyers", value: "1,276", change: "+12% this week", color: "text-green-500" },
+];
 
 const AllUsers: React.FC = () => {
-  // Just keep your local state for pagination etc.
+  // --- State ---
   const [users] = useState<User[]>(sampleusers);
   const [currentPage, setCurrentPage] = useState(1);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
-  const usersPerPage = 5;
+  const [rowsPerPage, setRowsPerPage] = useState(5); // single source of truth for page size
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const totalPages = Math.ceil(users.length / usersPerPage);
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+  // --- Derived data ---
+  const filteredData = users.filter((u) => {
+    const haystack = `${u.username} ${u.fullName} ${u.country} ${u.referredBy}`.toLowerCase();
+    return haystack.includes(searchTerm.toLowerCase());
+  });
 
-  // const handlePageChange = (pageNumber: number) => {
-  //   if (pageNumber < 1 || pageNumber > totalPages) return;
-  //   setCurrentPage(pageNumber);
-  // };
+  const totalItems = filteredData.length;
+  const totalPages = Math.max(1, Math.ceil(totalItems / rowsPerPage));
+
+  const paginatedUsers = filteredData.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
+  );
+
+  const [openActionId, setOpenActionId] = useState<string | null>(null);
+
+  const toggleActionMenu = (id: string) => {
+    setOpenActionId(openActionId === id ? null : id);
+  };
+
+  const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(filteredData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Users");
+
+    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+    const data = new Blob([excelBuffer], { type: "application/octet-stream" });
+    saveAs(data, "users.xlsx");
+  };
+
+  const exportToCSV = () => {
+    const worksheet = XLSX.utils.json_to_sheet(filteredData);
+    const csv = XLSX.utils.sheet_to_csv(worksheet);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    saveAs(blob, "users.csv");
+  };
+
+  const exportToPDF = () => {
+    const input = document.getElementById("user-table");
+
+    if (!input) return;
+
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("l", "pt", "a4");
+      const imgWidth = 820;
+      const pageHeight = 595;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      pdf.addImage(imgData, "PNG", 20, 20, imgWidth, imgHeight);
+      pdf.save("users.pdf");
+    });
+  };
+
+  const printTable = () => {
+    const printContent = document.getElementById("user-table");
+    const WinPrint = window.open("", "", "width=900,height=650");
+    if (WinPrint && printContent) {
+      WinPrint.document.write(printContent.outerHTML);
+      WinPrint.document.close();
+      WinPrint.focus();
+      WinPrint.print();
+      WinPrint.close();
+    }
+  };
+
+
+  // --- Helpers ---
+  const getStatusDot = (status: string) => {
+    switch (status) {
+      case "KYC":
+        return "bg-green-500";
+      case "Rejected":
+        return "bg-red-500";
+      default:
+        return "bg-gray-500";
+    }
+  };
 
   const handleRowsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRowsPerPage(parseInt(e.target.value, 10));
-    setCurrentPage(1);
+    setCurrentPage(1); // reset to first page when page size changes
   };
 
   const goToPage = (page: number) => {
@@ -208,256 +147,295 @@ const AllUsers: React.FC = () => {
     setCurrentPage(page);
   };
 
-  // Helper functions for status colors
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'KYC': return 'text-green-500';
-      case 'Rejected': return 'text-red-500';
-      default: return 'text-gray-500';
-    }
-  };
-
-  const getStatusDot = (status: string) => {
-    switch (status) {
-      case 'KYC': return 'bg-green-500';
-      case 'Rejected': return 'bg-red-500';
-      default: return 'bg-gray-500';
-    }
-  };
-
   return (
     <Layout>
-    <div className="min-h-screen bg-gray-50 flex">
-      {/* Sidebar */}
-      {/* <div className="w-64 bg-white shadow-sm border-r">
-        <div className="p-4">
-          <div className="flex items-center space-x-2 mb-8">
-            <div className="w-8 h-8 bg-purple-600 rounded flex items-center justify-center">
-              <span className="text-white font-bold text-sm">C</span>
-            </div>
-            <span className="font-semibold text-gray-900">CAPShield</span>
-          </div>
-          
-          <nav className="space-y-1">
-            {menuItems.map((item) => (
-              <button
-                key={item}
-                onClick={() => setSelectedMenu(item)}
-                className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
-                  selectedMenu === item
-                    ? 'bg-purple-600 text-white'
-                    : 'text-gray-600 hover:bg-gray-100'
-                }`}
-              >
-                {item}
-              </button>
-            ))}
-          </nav>
-        </div>
-      </div> */}
-       {/* Your table and pagination UI */}
-   {/* <main className="p-6">
-       
-      </main> */}
-      {/* Main Content */}
-      <div className="flex-1">
-        {/* Header */}
-        <header className="bg-white shadow-sm border-b px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+      <div className="min-h-screen bg-gray-50 flex">
+        <div className="flex-1">
+          {/* Header */}
+          <header className="bg-white shadow-sm border-b px-6 py-4">
+            <div className="flex items-center justify-between">
               <h1 className="text-xl font-semibold text-gray-900">All Users</h1>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                />
-              </div>
-              <button className="p-2 text-gray-400 hover:text-gray-600">
-                <Bell className="w-5 h-5" />
-              </button>
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-medium">A</span>
-                </div>
-                <ChevronDown className="w-4 h-4 text-gray-400" />
-              </div>
-            </div>
-          </div>
-        </header>
-
-        {/* Stats Cards */}
-        <div className="p-6">
-          <div className="grid grid-cols-5 gap-4 mb-6">
-            {stats.map((stat, index) => (
-              <div key={index} className="bg-white p-4 rounded-lg shadow-sm border">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-2xl font-bold text-gray-900">{stat.value}</span>
-                  <div className={`w-3 h-3 rounded-full ${stat.color.replace('text-', 'bg-')}`}></div>
-                </div>
-                <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
-                <p className="text-xs text-gray-500">{stat.change}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Filters */}
-          <div className="bg-white rounded-lg shadow-sm border mb-4">
-            <div className="p-4 border-b">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-600">Filter</span>
-                    <button className="flex items-center space-x-1 px-3 py-1 border border-gray-300 rounded text-sm">
-                      <span>KYC Status</span>
-                      <ChevronDown className="w-4 h-4" />
-                    </button>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-600">Transfer Type</span>
-                    <button className="flex items-center space-x-1 px-3 py-1 border border-gray-300 rounded text-sm">
-                      <span>All</span>
-                      <ChevronDown className="w-4 h-4" />
-                    </button>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-600">Referral Source</span>
-                    <button className="flex items-center space-x-1 px-3 py-1 border border-gray-300 rounded text-sm">
-                      <span>All</span>
-                      <ChevronDown className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
+              <div className="flex items-center space-x-4">
                 <button className="flex items-center space-x-1 bg-purple-600 text-white px-4 py-2 rounded text-sm">
                   <Filter className="w-4 h-4" />
                   <span>Filters</span>
                 </button>
+                <div className="flex gap-2 mt-2">
+                  <button onClick={exportToCSV} className="bg-green-100 p-2 rounded hover:bg-green-200">
+                    <FileText className="w-5 h-5 text-green-600" />
+                  </button>
+                  <button onClick={exportToExcel} className="bg-purple-100 p-2 rounded hover:bg-purple-200">
+                    <FileSpreadsheet className="w-5 h-5 text-purple-600" />
+                  </button>
+                  <button onClick={exportToPDF} className="bg-red-100 p-2 rounded hover:bg-red-200">
+                    <FileDown className="w-5 h-5 text-red-600" />
+                  </button>
+                  <button onClick={printTable} className="bg-orange-100 p-2 rounded hover:bg-orange-200">
+                    <Printer className="w-5 h-5 text-orange-600" />
+                  </button>
+                </div>
+
+
+                {/* <button className="p-2 text-gray-400 hover:text-gray-600">
+                  <Bell className="w-5 h-5" />
+                </button>
+                <div className="flex items-center space-x-2">
+                  <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
+                    <span className="text-white text-sm font-medium">A</span>
+                  </div>
+                  <ChevronDown className="w-4 h-4 text-gray-400" />
+                </div> */}
               </div>
             </div>
+          </header>
 
-            {/* Table */}
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      <input type="checkbox" className="rounded" />
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SL No.</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Full Name</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Country</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Referred By</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mobile</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">KYC</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joined On</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {users.map((user, index) => (
-                    <tr key={user.id} className="hover:bg-gray-50">
-                      <td className="px-4 py-3">
-                        <input type="checkbox" className="rounded" />
-                      </td>
-                      <td className="px-4 py-3 text-sm text-gray-900">{user.id}</td>
-                      <td className="px-4 py-3 text-sm text-blue-600">{user.username}</td>
-                      <td className="px-4 py-3 text-sm text-gray-900">
-                        <div className="flex items-center space-x-2">
-                          <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center">
-                            <span className="text-xs text-purple-600">{user.fullName.charAt(0)}</span>
-                          </div>
-                          <span>{user.fullName}</span>
-                        </div>
-                      </td>
-                      <td className="px-4 py-3 text-sm text-gray-900">{user.country}</td>
-                      <td className="px-4 py-3 text-sm text-gray-600">{user.referredBy}</td>
-                      <td className="px-4 py-3 text-center">
-                        <div className={`w-2 h-2 rounded-full ${user.email === '•' ? 'bg-green-500' : 'bg-red-500'} mx-auto`}></div>
-                      </td>
-                      <td className="px-4 py-3 text-center">
-                        <div className={`w-2 h-2 rounded-full ${user.mobile === '•' ? 'bg-green-500' : 'bg-red-500'} mx-auto`}></div>
-                      </td>
-                      <td className="px-4 py-3 text-center">
-                        <div className={`w-2 h-2 rounded-full ${getStatusDot(user.status)} mx-auto`}></div>
-                      </td>
-                      <td className="px-4 py-3">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          user.status === 'KYC' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                        }`}>
-                          {user.status}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3 text-sm text-gray-500">{user.joinedOn}</td>
-                      <td className="px-4 py-3">
-                        <button className="text-gray-400 hover:text-gray-600">
-                          <MoreHorizontal className="w-4 h-4" />
-                        </button>
-                      </td>
+          <div className="p-6">
+            {/* Stats */}
+            <div className="grid grid-cols-5 gap-4 mb-6">
+              {stats.map((stat, i) => (
+                <div key={i} className="bg-white p-4 rounded-lg shadow-sm border">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
+                    {/* <span className="text-2xl font-bold text-gray-900">{stat.value}</span> */}
+                    <div className={`w-3 h-3 rounded-full ${stat.color.replace("text-", "bg-")}`} />
+                  </div>
+                  <span className="text-2xl font-bold text-gray-900">{stat.value}</span>
+                  {/* <p className="text-sm text-gray-600 mb-1">{stat.label}</p> */}
+                  <p className="text-xs text-gray-500">{stat.change}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Filters header (visual only) */}
+            <div className="bg-white rounded-lg shadow-sm border mb-4">
+              <div className="p-4 border-b">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-2">
+
+                      <button className="flex items-center space-x-7 px-3 py-1 border border-gray-300 rounded text-sm">
+                        <span>Status</span>
+                        <ChevronDown className="w-4 h-4" />
+                      </button>
+                    </div>
+                    <div className="flex items-center space-x-2">
+
+                      <button className="flex items-center space-x-7 px-3 py-1 border border-gray-300 rounded text-sm">
+                        <span>KYC Status</span>
+                        <ChevronDown className="w-4 h-4" />
+                      </button>
+                    </div>
+                    <div className="flex items-center space-x-2">
+
+                      <button className="flex items-center space-x-7 px-3 py-1 border border-gray-300 rounded text-sm">
+                        <span>Interest Area</span>
+                        <ChevronDown className="w-4 h-4" />
+                      </button>
+                    </div>
+                    <div className="flex items-center space-x-2">
+
+                      <button className="flex items-center space-x-7 px-3 py-1 border border-gray-300 rounded text-sm">
+                        <span>Tokens Held</span>
+                        <ChevronDown className="w-4 h-4" />
+                      </button>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+
+                      <button className="flex items-center space-x-7 px-3 py-1 border border-gray-300 rounded text-sm">
+                        <span>Referral Status</span>
+                        <ChevronDown className="w-4 h-4" />
+                      </button>
+                    </div>
+
+
+                  </div>
+
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+                    <input
+                      type="text"
+                      placeholder="Search"
+                      value={searchTerm}
+                      onChange={(e) => {
+                        setSearchTerm(e.target.value);
+                        setCurrentPage(1);
+                      }}
+                      className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Table */}
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        {/* <input type="checkbox" className="rounded" /> */}
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SL No.</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Full Name</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Country</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Referred By</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mobile</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">KYC</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joined On</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-{/* 
-            <div className="flex  flex-row items-center justify-between gap-3 mt-4 text-sm">
-          <div className="flex items-center gap-2">
-            <span>Rows per page:</span>
-            <Dropdown
-              placeholder={usersPerPage.toString()}
-              options={rowsPerPageOptions}
-              onSelect={handleRowsPerPageChange}
-            />
-          </div>
-          <div className="flex items-center  gap-2">
-            <span className="w-full">
-              {`${indexOfFirstUser + 1} - ${Math.min(
-                indexOfLastUser,
-                users.length
-              )} of ${users.length}`}
-            </span>
-            <Button
-              onClick={handlePrevPage}
-              disabled={currentPage === 1}
-              className="px-2"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </Button>
-            <Button
-              onClick={handleNextPage}
-              disabled={currentPage === totalPages}
-              className="px-2"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </Button>
-          </div>
-        </div>
-      </div> */}
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {paginatedUsers.map((user) => (
+                      <tr key={user.id} className="hover:bg-gray-50">
+                        <td className="px-4 py-3">
+                          {/* <input type="checkbox" className="rounded" /> */}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-900">{user.id}</td>
+                        <td className="px-4 py-3 text-sm text-blue-600">{user.username}</td>
+                        <td className="px-4 py-3 text-sm text-gray-900">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center">
+                              <span className="text-xs text-purple-600">{user.fullName.charAt(1)}</span>
+                            </div>
+                            <span>{user.fullName}</span>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-900">{user.country}</td>
+                        <td className="px-4 py-3 text-sm text-gray-600">{user.referredBy}</td>
+                        <td className="px-4 py-3 text-center">
+                          <div className={`w-2 h-2 rounded-full ${user.email === "•" ? "bg-green-500" : "bg-red-500"} mx-auto`} />
+                        </td>
+                        <td className="px-4 py-3 text-center">
+                          <div className={`w-2 h-2 rounded-full ${user.mobile === "•" ? "bg-green-500" : "bg-red-500"} mx-auto`} />
+                        </td>
+                        <td className="px-4 py-3 text-center">
+                          <div className={`w-2 h-2 rounded-full ${getStatusDot(user.status)} mx-auto`} />
+                        </td>
+                        <td className="px-4 py-3">
+                          <span
+                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${user.status === "KYC" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+                              }`}
+                          >
+                            {user.status}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-500">{user.joinedOn}</td>
+                        <td className="px-4 py-3 relative">
+                          <button
+                            onClick={() => toggleActionMenu(user.id)}
+                            className="text-gray-400 hover:text-gray-600"
+                          >
+                            <MoreHorizontal className="w-5 h-5" />
+                          </button>
 
-            {/* Pagination */}
-            <div className="px-4 py-3 border-t border-gray-200 flex items-center justify-between">
-              <div className="text-sm text-gray-500">
-                Showing 1 to 5 of 15 entries
+                          {/* Dropdown */}
+                          {openActionId === user.id && (
+                            <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                              <ul className="py-1 text-sm text-gray-700">
+                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">View</li>
+                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Edit</li>
+                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Promote</li>
+                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Activate Ref Link</li>
+                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Block / Unblock</li>
+                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Add Fund</li>
+                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Debit Fund</li>
+                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Flag</li>
+                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Send Message</li>
+                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">View Logs</li>
+                              </ul>
+                            </div>
+                          )}
+                        </td>
+
+                      </tr>
+                    ))}
+                    {paginatedUsers.length === 0 && (
+                      <tr>
+                        <td className="px-4 py-6 text-center text-sm text-gray-500" colSpan={12}>
+                          No results.
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
               </div>
-              <div className="flex items-center space-x-2">
-                <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Previous</button>
-                <button className="px-3 py-1 bg-purple-600 text-white rounded text-sm">1</button>
-                <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">2</button>
-                <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">3</button>
-                <span className="px-2 text-gray-500">...</span>
-                <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Next</button>
+
+              {/* Pagination */}
+              <div className="flex justify-between items-center mt-4 px-4 pb-4">
+                {/* Left: rows per page + showing */}
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center">
+                    <label className="mr-2 text-gray-700 text-sm">Show</label>
+                    <select
+                      value={rowsPerPage}
+                      onChange={handleRowsPerPageChange}
+                      className="border border-gray-300 rounded px-2 py-1 text-sm"
+                    >
+                      {[5, 10, 20].map((n) => (
+                        <option key={n} value={n}>
+                          {n}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <p className="text-sm text-gray-500">
+                    {totalItems === 0
+                      ? "Showing 0 entries"
+                      : `Showing ${(currentPage - 1) * rowsPerPage + 1} to ${Math.min(
+                        currentPage * rowsPerPage,
+                        totalItems
+                      )} of ${totalItems} entries`}
+                  </p>
+                </div>
+
+                {/* Right: pager */}
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => goToPage(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className={`p-2 rounded ${currentPage === 1
+                      ? "text-gray-300 cursor-not-allowed"
+                      : "text-purple-600 hover:bg-purple-600 hover:text-white"
+                      }`}
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+
+                  {Array.from({ length: totalPages }).map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => goToPage(i + 1)}
+                      className={`px-3 py-1 rounded text-sm ${currentPage === i + 1
+                        ? "bg-purple-600 text-white"
+                        : "border border-gray-300 hover:bg-gray-100"
+                        }`}
+                    >
+                      {i + 1}
+                    </button>
+                  ))}
+
+                  <button
+                    onClick={() => goToPage(currentPage + 1)}
+                    disabled={currentPage === totalPages || totalItems === 0}
+                    className={`p-2 rounded ${currentPage === totalPages || totalItems === 0
+                      ? "text-gray-300 cursor-not-allowed"
+                      : "text-purple-600 hover:bg-purple-600 hover:text-white"
+                      }`}
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
+          {/* /p-6 */}
         </div>
       </div>
-    </div>
     </Layout>
   );
 };
