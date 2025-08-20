@@ -1,7 +1,6 @@
 import React from 'react';
-import Logo from '../../assets/right_logo.png'; // Adjust path as needed
+import Logo from '../../assets/Frame 1707483106.png'; // Adjust path as needed
 import { useState, useEffect } from "react";
-import ReactCountryFlag from "react-country-flag";
 
 interface HeaderProps {
   userImage: string;
