@@ -2,6 +2,7 @@ import React, { useState, ReactNode } from "react";
 import Header from "../common/Header";
 import Sidebar from "../common/Sidebar";
 import Footer from "../common/Footer";
+import { Outlet } from "react-router-dom"; 
 
 interface LayoutProps {
   children: ReactNode;
@@ -24,6 +25,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
          <div className="flex-1 overflow-y-auto">
     {children}
   </div>
+  
       </div>
       <Footer />
     </div>

@@ -24,7 +24,7 @@ const sidebarData: SidebarSection[] = [
   {
     type: 'main',
     name: 'MAIN',
-    items: [{ name: 'Dashboard', icon: HomeIcon, to: '/dashboard' }],
+    items: [{ name: 'Dashboard', icon: HomeIcon, to: '/' }],
   },
   {
     type: 'heading',

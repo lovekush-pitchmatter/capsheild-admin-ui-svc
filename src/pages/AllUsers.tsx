@@ -55,7 +55,7 @@ const AllUsers: React.FC = () => {
   // --- State ---
   const [users] = useState<User[]>(sampleusers);
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(5); // single source of truth for page size
+  const [rowsPerPage, setRowsPerPage] = useState(5); 
   const [searchTerm, setSearchTerm] = useState("");
 
   // --- Derived data ---
