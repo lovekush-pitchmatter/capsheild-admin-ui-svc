@@ -5,11 +5,11 @@ import PresalePerformance from "./PresalePerformance";
 import DashboardCards from "./DashboardCards";
 import { statsData } from "./statsData";
 import InvestorMap from "./InvestorMap";
-import WalletHoldings from "./WalletHoldings ";
-import LatestInvestments from "./LatestInvestments.jsx";
-import EngagementReport from "./EngagementReport.jsx";
-import TopRewardEarners from "./TopRewardEarners.jsx";
-import TopCapxInvestors from "./TopCapxInvestors.jsx";
+import WalletHoldings from "./WalletHoldings";
+import LatestInvestments from "./LatestInvestments";
+import EngagementReport from "./EngagementReport";
+import TopRewardEarners from "./TopRewardEarners";
+import TopCapxInvestors from "./TopCapxInvestors";
 
 const DashboardComp = () => {
   return (
