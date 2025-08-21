@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import EngagementSourcesCard from "./EngagementSourcesCard.jsx";
-import CustomerOverviewCard from "./CustomerOverviewCard.jsx";
+import EngagementSourcesCard from "./EngagementSourcesCard";
+import CustomerOverviewCard from "./CustomerOverviewCard";
 
 export default function DashboardCards() {
   return (
