@@ -44,166 +44,161 @@ const sidebarData: SidebarSection[] = [
     type: 'heading',
     name: 'KYC',
     items: [
-      { name: 'Applications', icon: HomeIcon, to: '/startups/applications' },
-      { name: 'Deals', icon: HomeIcon, to: '/startups/deals' },
-      { name: 'Reports', icon: HomeIcon, to: '/startups/reports' },
+      { name: 'Customer List', icon: HomeIcon, to: '/kyc/customers' },
+      { name: 'Verification Status', icon: HomeIcon, to: '/kyc/verification-status' },
+
     ],
   },
   {
     type: 'heading',
     name: 'Referrals',
     items: [
-      { name: 'Investor Info', icon: HomeIcon, to: '/investors/info' },
-      { name: 'Investments', icon: HomeIcon, to: '/investors/investments' },
-      { name: 'Reports', icon: HomeIcon, to: '/investors/reports' },
+      { name: 'Referral Dashboard', icon: HomeIcon, to: '/referrals/dashboard' },
+      { name: 'Referral List', icon: HomeIcon, to: '/referrals/list' },
     ],
   },
   {
     type: 'heading',
     name: 'Presale',
     items: [
-      { name: 'Applications', icon: HomeIcon, to: '/mentors/applications' },
-      { name: 'Management', icon: HomeIcon, to: '/mentors/management' },
-      { name: 'Reports', icon: HomeIcon, to: '/mentors/reports' },
+      { name: 'Presale Applications', icon: HomeIcon, to: '/presale/applications' },
+      { name: 'Presale Management', icon: HomeIcon, to: '/presale/management' },
     ],
   },
   {
     type: 'heading',
     name: 'Widgets',
     items: [
-      { name: 'Applications', icon: HomeIcon, to: '/vendors/applications' },
-      { name: 'Products & Sales', icon: HomeIcon, to: '/vendors/products' },
-      { name: 'Reports', icon: HomeIcon, to: '/vendors/reports' },
+      { name: 'Widget Applications', icon: HomeIcon, to: '/widgets/applications' },
+      { name: 'Products & Sales', icon: HomeIcon, to: '/widgets/products' },
     ],
   },
   {
     type: 'heading',
     name: 'Staking',
     items: [
-      { name: 'Applications', icon: HomeIcon, to: '/enthusiast/applications' },
-      { name: 'Reports', icon: HomeIcon, to: '/enthusiast/reports' },
+      { name: 'Staking Applications', icon: HomeIcon, to: '/staking/applications' },
+      { name: 'Active Stakes', icon: HomeIcon, to: '/staking/active' },
     ],
   },
   {
     type: 'heading',
     name: 'CAPX Token',
     items: [
-      { name: 'Management', icon: HomeIcon, to: '/chapters/management' },
-      { name: 'Reports', icon: HomeIcon, to: '/chapters/reports' },
+      { name: 'Token Management', icon: HomeIcon, to: '/capx-token/management' },
+      { name: 'Transaction Reports', icon: HomeIcon, to: '/capx-token/reports' },
     ],
   },
   {
     type: 'heading',
     name: 'Wallet',
     items: [
-      { name: 'Event Management', icon: HomeIcon, to: '/events/management' },
-      { name: 'Reports', icon: HomeIcon, to: '/events/reports' },
+      { name: 'Wallet Overview', icon: HomeIcon, to: '/wallet/overview' },
+      { name: 'Transaction History', icon: HomeIcon, to: '/wallet/transactions' },
     ],
   },
   {
     type: 'heading',
     name: 'Deposits',
     items: [
-      { name: 'Transactions', icon: HomeIcon, to: '/finance/transactions' },
-      { name: 'Revenue & Fees', icon: HomeIcon, to: '/finance/revenue' },
-      { name: 'Reports', icon: HomeIcon, to: '/finance/reports' },
+      { name: 'Transactions', icon: HomeIcon, to: '/deposits/transactions' },
+      { name: 'Revenue & Fees', icon: HomeIcon, to: '/deposits/revenue' },
     ],
   },
   {
     type: 'heading',
     name: 'Withdrawals',
     items: [
-      { name: 'Manage Membership', icon: HomeIcon, to: '/subscriptions/manage' },
-      { name: 'Promo Codes', icon: HomeIcon, to: '/subscriptions/promo-codes' },
+      { name: 'Manage Withdrawals', icon: HomeIcon, to: '/withdrawals/manage' },
+      { name: 'Withdrawal History', icon: HomeIcon, to: '/withdrawals/history' },
     ],
   },
   {
     type: 'heading',
     name: 'Commmissions',
     items: [
-      { name: 'Admin Staff', icon: HomeIcon, to: '/staff/admin' },
-      { name: 'Logs', icon: HomeIcon, to: '/staff/logs' },
+      { name: 'Manage Withdrawals', icon: HomeIcon, to: '/withdrawals/manage' },
+      { name: 'Withdrawal History', icon: HomeIcon, to: '/withdrawals/history' },
     ],
   },
   {
     type: 'heading',
     name: 'Rewards',
     items: [
-      { name: 'Country & Regions', icon: HomeIcon, to: '/settings/countries' },
-      { name: 'Currency & Language', icon: HomeIcon, to: '/settings/currency-language' },
-      { name: 'Skills & Interests', icon: HomeIcon, to: '/settings/skills-interests' },
-      { name: 'Targeting & Segmentation', icon: HomeIcon, to: '/settings/targeting' },
-      { name: 'Payment Settings', icon: HomeIcon, to: '/settings/payment' },
-      { name: 'Roles & Permissions', icon: HomeIcon, to: '/settings/roles' },
-      { name: 'Tax Management', icon: HomeIcon, to: '/settings/tax' },
-      { name: 'Communication Settings', icon: HomeIcon, to: '/settings/communication' },
+      { name: 'Country & Regions', icon: HomeIcon, to: '/rewards/countries' },
+      { name: 'Currency & Language', icon: HomeIcon, to: '/rewards/currency-language' },
+      { name: 'Skills & Interests', icon: HomeIcon, to: '/rewards/skills-interests' },
+      { name: 'Targeting & Segmentation', icon: HomeIcon, to: '/rewards/targeting' },
     ],
   },
   {
     type: 'heading',
     name: 'AngelSEED',
     items: [
-      { name: 'Overview', icon: HomeIcon, to: '/referrals/overview' },
-      { name: 'Plans', icon: HomeIcon, to: '/referrals/plans' },
+      { name: 'Overview', icon: HomeIcon, to: '/angelseed/overview' },
+      { name: 'Plans', icon: HomeIcon, to: '/angelseed/plans' },
     ],
   },
   {
     type: 'heading',
     name: 'Games',
     items: [
-      { name: 'Third-Party', icon: HomeIcon, to: '/integrations/third-party' },
-      { name: 'Plans', icon: HomeIcon, to: '/integrations/plans' },
+      { name: 'Third-Party', icon: HomeIcon, to: '/games/third-party' },
+      { name: 'Plans', icon: HomeIcon, to: '/games/plans' },
     ],
   },
   {
     type: 'heading',
     name: 'Polls & Quizzes',
     items: [
-      { name: 'User Analytics', icon: HomeIcon, to: '/analytics/users' },
-      { name: 'Deal Analytics', icon: HomeIcon, to: '/analytics/deals' },
+      { name: 'Poll Analytics', icon: HomeIcon, to: '/polls-quizzes/poll-analytics' },
+      { name: 'Quiz Analytics', icon: HomeIcon, to: '/polls-quizzes/quiz-analytics' },
     ],
   },
   {
     type: 'heading',
     name: 'Deals',
     items: [
-      { name: 'Tickets', icon: HomeIcon, to: '/support/tickets' },
-      { name: 'Knowledge Base', icon: HomeIcon, to: '/support/knowledge' },
+      { name: 'Active Deals', icon: HomeIcon, to: '/deals/active' },
+      { name: 'Pending Deals', icon: HomeIcon, to: '/deals/pending' },
+      { name: 'Deal History', icon: HomeIcon, to: '/deals/history' },
     ],
   },
   {
     type: 'heading',
     name: 'Content',
     items: [
-      { name: 'Account Security', icon: HomeIcon, to: '/security/account' },
-      { name: 'Compliance', icon: HomeIcon, to: '/security/compliance' },
+      { name: 'Articles', icon: HomeIcon, to: '/content/articles' },
+      { name: 'Media Library', icon: HomeIcon, to: '/content/media-library' },
+      { name: 'Drafts', icon: HomeIcon, to: '/content/drafts' },
+
     ],
   },
   {
     type: 'heading',
     name: 'Reports',
     items: [
-      { name: 'Overview', icon: HomeIcon, to: '/matching/overview' },
-      { name: 'Matching Criteria', icon: HomeIcon, to: '/matching/criteria' },
-      { name: 'Match History', icon: HomeIcon, to: '/matching/history' },
+      { name: 'Overview', icon: HomeIcon, to: '/reports/overview' },
+      { name: 'Sales Reports', icon: HomeIcon, to: '/reports/sales' },
+      { name: 'User Reports', icon: HomeIcon, to: '/reports/users' },
     ],
   },
   {
     type: 'heading',
     name: 'Support',
     items: [
-      { name: 'Algorithm Configuration', icon: HomeIcon, to: '/algorithm/config' },
-      { name: 'Automated Matching', icon: HomeIcon, to: '/algorithm/automated' },
-      { name: 'Performance Analytics', icon: HomeIcon, to: '/algorithm/analytics' },
+      { name: 'Ticket Management', icon: HomeIcon, to: '/support/tickets' },
+      { name: 'Knowledge Base', icon: HomeIcon, to: '/support/knowledge-base' },
+      { name: 'Live Chat', icon: HomeIcon, to: '/support/live-chat' },
     ],
   },
   {
     type: 'heading',
     name: 'Admins',
     items: [
-      { name: 'Create Questions', icon: HomeIcon, to: '/questions/create' },
-      { name: 'Question Logic', icon: HomeIcon, to: '/questions/logic' },
-      { name: 'Question Reports', icon: HomeIcon, to: '/questions/reports' },
+      { name: 'User Management', icon: HomeIcon, to: '/admins/users' },
+      { name: 'Roles & Permissions', icon: HomeIcon, to: '/admins/roles' },
+      { name: 'Activity Logs', icon: HomeIcon, to: '/admins/logs' },
     ],
   },
 
@@ -211,81 +206,77 @@ const sidebarData: SidebarSection[] = [
     type: 'heading',
     name: 'Settings',
     items: [
-      { name: 'Create Questions', icon: HomeIcon, to: '/questions/create' },
-      { name: 'Question Logic', icon: HomeIcon, to: '/questions/logic' },
-      { name: 'Question Reports', icon: HomeIcon, to: '/questions/reports' },
+      { name: 'General Settings', icon: HomeIcon, to: '/settings/general' },
+      { name: 'User Preferences', icon: HomeIcon, to: '/settings/preferences' },
+      { name: 'Security Settings', icon: HomeIcon, to: '/settings/security' },
+      { name: 'Notification Settings', icon: HomeIcon, to: '/settings/notifications' },
     ],
   },
   {
     type: 'heading',
     name: 'Currency & Country',
     items: [
-      { name: 'Create Questions', icon: HomeIcon, to: '/questions/create' },
-      { name: 'Question Logic', icon: HomeIcon, to: '/questions/logic' },
-      { name: 'Question Reports', icon: HomeIcon, to: '/questions/reports' },
+      { name: 'Currency Settings', icon: HomeIcon, to: '/currency-country/currency-settings' },
+      { name: 'Country Settings', icon: HomeIcon, to: '/currency-country/country-settings' },
+      { name: 'Exchange Rates', icon: HomeIcon, to: '/currency-country/exchange-rates' },
     ],
   },
   {
     type: 'heading',
     name: 'Network Settings',
     items: [
-      { name: 'Create Questions', icon: HomeIcon, to: '/questions/create' },
-      { name: 'Question Logic', icon: HomeIcon, to: '/questions/logic' },
-      { name: 'Question Reports', icon: HomeIcon, to: '/questions/reports' },
+      { name: 'VPN Configuration', icon: HomeIcon, to: '/network-settings/vpn' },
+      { name: 'Firewall Rules', icon: HomeIcon, to: '/network-settings/firewall' },
+      { name: 'Proxy Settings', icon: HomeIcon, to: '/network-settings/proxy' },
     ],
   },
   {
     type: 'heading',
     name: 'Package Plans',
     items: [
-      { name: 'Create Questions', icon: HomeIcon, to: '/questions/create' },
-      { name: 'Question Logic', icon: HomeIcon, to: '/questions/logic' },
-      { name: 'Question Reports', icon: HomeIcon, to: '/questions/reports' },
+      { name: 'Plan Overview', icon: HomeIcon, to: '/package-plans/overview' },
+      { name: 'Create Plan', icon: HomeIcon, to: '/package-plans/create' },
     ],
   },
   {
     type: 'heading',
     name: 'Payment Gateways',
     items: [
-      { name: 'Create Questions', icon: HomeIcon, to: '/questions/create' },
-      { name: 'Question Logic', icon: HomeIcon, to: '/questions/logic' },
-      { name: 'Question Reports', icon: HomeIcon, to: '/questions/reports' },
+      { name: 'Gateway Configuration', icon: HomeIcon, to: '/payment-gateways/configuration' },
+      { name: 'Transaction Logs', icon: HomeIcon, to: '/payment-gateways/transactions' },
     ],
   },
   {
     type: 'heading',
     name: 'Integrations',
     items: [
-      { name: 'Create Questions', icon: HomeIcon, to: '/questions/create' },
-      { name: 'Question Logic', icon: HomeIcon, to: '/questions/logic' },
-      { name: 'Question Reports', icon: HomeIcon, to: '/questions/reports' },
+      { name: 'API Keys', icon: HomeIcon, to: '/integrations/api-keys' },
+      { name: 'Connected Services', icon: HomeIcon, to: '/integrations/services' },
+      { name: 'Integration Logs', icon: HomeIcon, to: '/integrations/logs' },
     ],
   },
   {
     type: 'heading',
     name: 'Logs',
     items: [
-      { name: 'Create Questions', icon: HomeIcon, to: '/questions/create' },
-      { name: 'Question Logic', icon: HomeIcon, to: '/questions/logic' },
-      { name: 'Question Reports', icon: HomeIcon, to: '/questions/reports' },
+      { name: 'System Logs', icon: HomeIcon, to: '/logs/system' },
+      { name: 'User Activity', icon: HomeIcon, to: '/logs/user-activity' },
     ],
   },
   {
     type: 'heading',
     name: 'Audit Tools',
     items: [
-      { name: 'Create Questions', icon: HomeIcon, to: '/questions/create' },
-      { name: 'Question Logic', icon: HomeIcon, to: '/questions/logic' },
-      { name: 'Question Reports', icon: HomeIcon, to: '/questions/reports' },
+      { name: 'Audit Logs', icon: HomeIcon, to: '/audit-tools/logs' },
+      { name: 'Compliance Checks', icon: HomeIcon, to: '/audit-tools/compliance' },
     ],
   },
   {
     type: 'heading',
     name: 'Blacklist',
     items: [
-      { name: 'Create Questions', icon: HomeIcon, to: '/questions/create' },
-      { name: 'Question Logic', icon: HomeIcon, to: '/questions/logic' },
-      { name: 'Question Reports', icon: HomeIcon, to: '/questions/reports' },
+      { name: 'Manage Blacklist', icon: HomeIcon, to: '/blacklist/manage' },
+      { name: 'Blacklist Reports', icon: HomeIcon, to: '/blacklist/reports' },
     ],
   },
 
@@ -368,10 +359,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                             : 'text-[#171725] hover:bg-gray-100'
                             }`}
                         >
-                          {/* <item.icon
-                            className="mr-3 flex-shrink-0"
-                            stroke={isActive ? '#0056D2' : '#292D32'}
-                          /> */}
+                          
                           <div
                             className={`w-2 h-2 rounded-full mr-3 flex-shrink-0 ${isActive ? 'bg-blue-600' : 'bg-gray-600'
                               }`}

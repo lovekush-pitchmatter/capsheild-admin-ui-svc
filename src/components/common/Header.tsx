@@ -66,7 +66,11 @@ const Header: React.FC<HeaderProps> = ({ userImage, userName, userDesignation, o
     }
   };
 
+//{Using Api for the Profile picture }
+//{so why i did two specific effect for the image so you can switch either you want to use the profile picture for Api or you want to use it for just one specific image }
+//{the effect for the profile picture using api it is just to enhance the page }
 
+//{Effect for using api for the profile picture}
 
   useEffect(() => {
     fetch("https://randomuser.me/api/")
@@ -75,17 +79,30 @@ const Header: React.FC<HeaderProps> = ({ userImage, userName, userDesignation, o
         const userData = {
           id: 1,
           name: `${data.results[0].name.first} ${data.results[0].name.last}`,
-          profilePicture: data.results[0].picture.medium, 
+          profilePicture: data.results[0].picture.medium,
         };
         setUser(userData);
       })
       .catch((err) => console.error("Error fetching user:", err));
   }, []);
 
+  // {one specific image for the admin profile picture}
+  //{Effect for a specific profile picture  }
+
+  // useEffect(() => {
+  //   // Instead of fetching, just set one fixed user
+  //   const staticUser: User = {
+  //     id: 1,
+  //     name: "John Doe",
+  //     profilePicture: "https://i.pravatar.cc/150?img=3", // You can replace with your image path
+  //   };
+  //   setUser(staticUser);
+  // }, []);
+
   useEffect(() => {
     const fetchLocation = async () => {
       try {
-        const res = await fetch("https://ipapi.co/json/"); 
+        const res = await fetch("https://ipapi.co/json/");
         const data = await res.json();
 
         if (data && data.country_code) {
@@ -325,13 +342,44 @@ const Header: React.FC<HeaderProps> = ({ userImage, userName, userDesignation, o
             />
           </div>
           {showUserDropdown && (
-            <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow-lg z-10">
-              <div className="p-2 hover:bg-gray-100 cursor-pointer">My Profile</div>
-              <div className="p-2 hover:bg-gray-100 cursor-pointer">Edit Profile</div>
-              <div className="p-2 hover:bg-gray-100 cursor-pointer">Inbox</div>
-              <div className="p-2 hover:bg-gray-100 cursor-pointer">Settings</div>
-              <div className="p-2 hover:bg-gray-100 cursor-pointer">Help</div>
-              <div className="p-2 hover:bg-gray-100 cursor-pointer">Logout</div>
+            <div className="absolute right-0 mt-2 w-56 bg-white border rounded-xl shadow-lg z-20">
+              {/* User Info */}
+              <div className="p-3 border-b border-gray-200">
+                <p className="text-sm font-semibold text-gray-800">{user?.name || "Samuel sam"}</p>
+                <p className="text-xs text-gray-500">{userDesignation || "Admin"}</p>
+              </div>
+
+              {/* Menu Items */}
+              <div className="py-2">
+                <div className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"></path>
+                    <path d="M6 20v-2c0-2.21 1.79-4 4-4h4c2.21 0 4 1.79 4 4v2"></path>
+                  </svg>
+                  My Profile
+                </div>
+                <div className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                  </svg>
+                  Inbox
+                </div>
+                <div className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path d="M12 8v4l3 3"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                  </svg>
+                  Settings
+                </div>
+                <div className="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 cursor-pointer">
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path d="M9 21h6"></path>
+                    <path d="M12 17v-8"></path>
+                    <path d="M5 7h14"></path>
+                  </svg>
+                  Log Out
+                </div>
+              </div>
             </div>
           )}
         </div>

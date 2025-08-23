@@ -6,9 +6,9 @@ import {
   MoreHorizontal,
   ChevronLeft,
   ChevronRight,
-  FileDown, 
-  FileSpreadsheet, 
-  FileText, 
+  FileDown,
+  FileSpreadsheet,
+  FileText,
   Printer
 } from "lucide-react";
 import * as XLSX from "xlsx";
@@ -16,6 +16,11 @@ import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import Layout from "../components/layout/Layout";
+import totalUsersImg from '../assets/Frame 1171275854.png';
+import activeUsersImg from '../assets/active-users.png';
+import kycImg from '../assets/kyc-verified.png';
+import blockedImg from '../assets/blocked-users.png';
+import presaleImg from '../assets/presale-buyers.png';
 
 interface User {
   id: string;
@@ -29,6 +34,8 @@ interface User {
   joinedOn: string;
   action: string;
 }
+
+
 
 const sampleusers: User[] = [
   { id: "01", username: "alinapetrova", fullName: "Alina Petrova", country: "UAE", referredBy: "eleanorpena", email: "•", mobile: "•", status: "KYC", joinedOn: "25 Jan 2024", action: "⚙️" },
@@ -44,21 +51,23 @@ const sampleusers: User[] = [
 ];
 
 const stats = [
-  { label: "Total Users", value: "115", change: "+10% this week", color: "text-orange-500" },
-  { label: "Active Users", value: "300", change: "+8% this week", color: "text-blue-500" },
-  { label: "KYC Verified", value: "1500", change: "+19% this week", color: "text-purple-500" },
-  { label: "Blocked/Flagged Users", value: "200", change: "+3% this week", color: "text-pink-500" },
-  { label: "Presale Buyers", value: "1,276", change: "+12% this week", color: "text-green-500" },
+  { label: "Total Users", value: "115", changeValue: "+20", changeText: "this week", image: totalUsersImg },
+  { label: "Active Users", value: "300", changeValue: "+20", changeText: "this week", image: activeUsersImg },
+  { label: "KYC Verified", value: "1500", changeValue: "+1k", changeText: "this week", image: kycImg },
+  { label: "Blocked/Flagged Users", value: "200", changeValue: "+10", changeText: "this week", image: blockedImg },
+  { label: "Presale Buyers", value: "1,276", changeValue: "+100", changeText: "this week", image: presaleImg },
 ];
 
+
+
+
+
 const AllUsers: React.FC = () => {
-  // --- State ---
   const [users] = useState<User[]>(sampleusers);
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(5); 
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // --- Derived data ---
   const filteredData = users.filter((u) => {
     const haystack = `${u.username} ${u.fullName} ${u.country} ${u.referredBy}`.toLowerCase();
     return haystack.includes(searchTerm.toLowerCase());
@@ -125,7 +134,6 @@ const AllUsers: React.FC = () => {
   };
 
 
-  // --- Helpers ---
   const getStatusDot = (status: string) => {
     switch (status) {
       case "KYC":
@@ -139,7 +147,7 @@ const AllUsers: React.FC = () => {
 
   const handleRowsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRowsPerPage(parseInt(e.target.value, 10));
-    setCurrentPage(1); // reset to first page when page size changes
+    setCurrentPage(1);
   };
 
   const goToPage = (page: number) => {
@@ -176,76 +184,129 @@ const AllUsers: React.FC = () => {
                 </div>
 
 
-                {/* <button className="p-2 text-gray-400 hover:text-gray-600">
-                  <Bell className="w-5 h-5" />
-                </button>
-                <div className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
-                    <span className="text-white text-sm font-medium">A</span>
-                  </div>
-                  <ChevronDown className="w-4 h-4 text-gray-400" />
-                </div> */}
               </div>
             </div>
           </header>
 
           <div className="p-6">
-            {/* Stats */}
-            <div className="grid grid-cols-5 gap-4 mb-6">
+            <div className="grid grid-cols-5 gap-5 mb-6">
               {stats.map((stat, i) => (
-                <div key={i} className="bg-white p-4 rounded-lg shadow-sm border">
+                <div key={i} className="bg-white p-4 rounded-lg shadow-sm ">
                   <div className="flex items-center justify-between mb-2">
-                    <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
-                    {/* <span className="text-2xl font-bold text-gray-900">{stat.value}</span> */}
-                    <div className={`w-3 h-3 rounded-full ${stat.color.replace("text-", "bg-")}`} />
+                    <img src={stat.image} alt={stat.label} className="w-10 h-10 mobject-contain" />
                   </div>
                   <span className="text-2xl font-bold text-gray-900">{stat.value}</span>
-                  {/* <p className="text-sm text-gray-600 mb-1">{stat.label}</p> */}
-                  <p className="text-xs text-gray-500">{stat.change}</p>
+                  <p className="text-xs">
+                    <span className="inline-block bg-green-100 text-green-600 text-sm px-2 py-0.5 rounded-md font-semibold">{stat.changeValue}</span>{" "}
+                    <span className="text-gray-500">{stat.changeText}</span>
+                  </p>
                 </div>
               ))}
             </div>
 
-            {/* Filters header (visual only) */}
-            <div className="bg-white rounded-lg shadow-sm border mb-4">
+            <div className="bg-white rounded-lg shadow-sm ">
               <div className="p-4 border-b">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <div className="flex items-center space-x-2">
 
-                      <button className="flex items-center space-x-7 px-3 py-1 border border-gray-300 rounded text-sm">
-                        <span>Status</span>
-                        <ChevronDown className="w-4 h-4" />
-                      </button>
+                      <select
+                        className="px-3 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        onChange={(e) => {
+                          console.log("Status selected:", e.target.value);
+                        }}
+                      >
+                        <option value="" disabled selected>
+                          Stats
+                        </option>
+                        <option value="Active">✅ All</option>
+                        <option value="Inactive">🟢 Active</option>
+                        <option value="Blocked">⛔ Blocked</option>
+                      </select>
+
+
                     </div>
                     <div className="flex items-center space-x-2">
 
-                      <button className="flex items-center space-x-7 px-3 py-1 border border-gray-300 rounded text-sm">
-                        <span>KYC Status</span>
-                        <ChevronDown className="w-4 h-4" />
-                      </button>
+                      <select
+                        className="px-3 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        onChange={(e) => {
+                          console.log("Status selected:", e.target.value);
+                        }}
+                      >
+                        <option value="" disabled selected >KYC Status</option>
+                        <option value="Active">Approved</option>
+                        <option value="Inactive">Pending</option>
+                        <option value="Blocked">Rejected</option>
+                        <option value="Blocked">Auo-Verified</option>
+                      </select>
                     </div>
                     <div className="flex items-center space-x-2">
 
-                      <button className="flex items-center space-x-7 px-3 py-1 border border-gray-300 rounded text-sm">
-                        <span>Interest Area</span>
-                        <ChevronDown className="w-4 h-4" />
-                      </button>
+                      <select
+                        className="px-3 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        onChange={(e) => {
+                          console.log("Status selected:", e.target.value);
+                        }}
+                      >
+                        <option value="" disabled selected>Investor Type</option>
+                        <option value="Active">All</option>
+                        <option value="Inactive">Angel Investor</option>
+                        <option value="Blocked">Venture Capital</option>
+                        <option value="Blocked">Institutional Investor</option>
+                        <option value="Blocked">Community Member</option>
+                        <option value="Blocked">Startup Founder</option>
+                        <option value="Blocked">Mentor/Advisor</option>
+                      </select>
                     </div>
                     <div className="flex items-center space-x-2">
 
-                      <button className="flex items-center space-x-7 px-3 py-1 border border-gray-300 rounded text-sm">
-                        <span>Tokens Held</span>
-                        <ChevronDown className="w-4 h-4" />
-                      </button>
+                      <select
+                        className="px-3 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        onChange={(e) => {
+                          console.log("Status selected:", e.target.value);
+                        }}
+                      >
+                        <option value="" disabled selected >Interest Area</option>
+                        <option value="Active">Startup</option>
+                        <option value="Inactive">Real Estate</option>
+                        <option value="Blocked">Franchise Businesses</option>
+                        <option value="Blocked">Tokenized Assets</option>
+                        <option value="Blocked">Private Equity</option>
+                        <option value="Blocked">Impact / Sustainability</option>
+                        <option value="Blocked">Other Alternative Assests</option>
+                      </select>
                     </div>
 
                     <div className="flex items-center space-x-2">
 
-                      <button className="flex items-center space-x-7 px-3 py-1 border border-gray-300 rounded text-sm">
-                        <span>Referral Status</span>
-                        <ChevronDown className="w-4 h-4" />
-                      </button>
+                      <select
+                        className="px-3 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        onChange={(e) => {
+                          console.log("Status selected:", e.target.value);
+                        }}
+                      >
+                        <option value="" disabled selected >Token Held</option>
+                        <option value="Active">All</option>
+                        <option value="Inactive">CAPX &gt; 0</option>
+                        <option value="Blocked">ANGEL &gt; 0</option>
+                        <option value="Blocked">No Tokens</option>
+                      </select>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+
+                      <select
+                        className="px-3 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        onChange={(e) => {
+                          console.log("Status selected:", e.target.value);
+                        }}
+                      >
+                        <option value="" disabled selected>Referral Status</option>
+                        <option value="Active">All</option>
+                        <option value="Inactive">Has Referrals</option>
+                        <option value="Blocked">No Referrals</option>
+                      </select>
                     </div>
 
 
@@ -261,7 +322,7 @@ const AllUsers: React.FC = () => {
                         setSearchTerm(e.target.value);
                         setCurrentPage(1);
                       }}
-                      className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      className="pl-10 pr-15 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -273,7 +334,6 @@ const AllUsers: React.FC = () => {
                   <thead className="bg-gray-50">
                     <tr>
                       <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        {/* <input type="checkbox" className="rounded" /> */}
                       </th>
                       <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SL No.</th>
                       <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
@@ -292,7 +352,6 @@ const AllUsers: React.FC = () => {
                     {paginatedUsers.map((user) => (
                       <tr key={user.id} className="hover:bg-gray-50">
                         <td className="px-4 py-3">
-                          {/* <input type="checkbox" className="rounded" /> */}
                         </td>
                         <td className="px-4 py-3 text-sm text-gray-900">{user.id}</td>
                         <td className="px-4 py-3 text-sm text-blue-600">{user.username}</td>
@@ -355,8 +414,8 @@ const AllUsers: React.FC = () => {
                     ))}
                     {paginatedUsers.length === 0 && (
                       <tr>
-                        <td className="px-4 py-6 text-center text-sm text-gray-500" colSpan={12}>
-                          No results.
+                        <td className="px-4 py-6 text-center text-3xl text-gray-500" colSpan={12}>
+                          No results found.
                         </td>
                       </tr>
                     )}
@@ -433,7 +492,6 @@ const AllUsers: React.FC = () => {
               </div>
             </div>
           </div>
-          {/* /p-6 */}
         </div>
       </div>
     </Layout>
