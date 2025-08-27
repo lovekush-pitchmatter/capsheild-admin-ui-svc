@@ -56,7 +56,7 @@ const Data = () => {
             <tbody>
               {paginatedData.length > 0 ? (
                 paginatedData.map((row,index) => (
-                  <TableRow key={row.id} row={row} index={startIndex + index}/>
+                  <TableRow key={row.id} row={row} index={startIndex + index} image={row.image}/>
                 ))
               ) : (
                 <tr>
