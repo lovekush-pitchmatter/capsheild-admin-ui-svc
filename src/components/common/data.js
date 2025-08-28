@@ -8,40 +8,6 @@ const data = [
     label: "Users",
     icon: "MdPeople",
     path: "/users",
-    children: [
-      {
-        label: "All Users",
-        path: "/all-users",
-      },
-      {
-        label: "KYC Verification",
-        path: "/kyc-verification",
-      },
-      {
-        label: "Referrals & Uplines",
-        path: "/referrals-uplines",
-      },
-      {
-        label: "Commission Status",
-        path: "/commission-status",
-      },
-      {
-        label: "User Actions Log",
-        path: "/user-actions-log",
-      },
-      {
-        label: "Add Fund",
-        path: "/add-fund",
-      },
-      {
-        label: "Deduct Fund",
-        path: "/deduct-fund",
-      },
-      {
-        label: "Blocked Users",
-        path: "/blocked-users",
-      }
-    ],
   },
   {
     label: "KYC",

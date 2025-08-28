@@ -1,9 +1,9 @@
-import user1 from "../../../assets/user1.jpg"
-import user2 from "../../../assets/user2.jpg"
-import user3 from "../../../assets/user3.jpg"
-import user4 from "../../../assets/user4.jpg"
-import user5 from "../../../assets/user5.jpg"
-import user6 from "../../../assets/user6.jpg"
+import user1 from "../../assets/user1.jpg"
+import user2 from "../../assets/user2.jpg"
+import user3 from "../../assets/user3.jpg"
+import user4 from "../../assets/user4.jpg"
+import user5 from "../../assets/user5.jpg"
+import user6 from "../../assets/user6.jpg"
 
 const sampleData = [
   {
