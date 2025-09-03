@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";  
 import Dashboard from "./pages/dashboard/Dashboard";
-import KYC from "./pages/kyc/KYC";
+import KYCVerification from "./pages/kycVerification/KYCVerification";
+import Referral from "./pages/referral/Referral";
 
 
  
@@ -10,7 +11,8 @@ const  App=()=> {
       <Routes>
         <Route path="*" element={<div>404 - Page Not Found</div>} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/kyc" element={<KYC/>} />
+        <Route path="/kyc-verification" element={<KYCVerification/>} />
+        <Route path="/referrals-uplines" element={<Referral/>} />
       </Routes>
     </Router>
   );

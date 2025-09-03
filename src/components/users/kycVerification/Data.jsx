@@ -1,12 +1,11 @@
 import {FiltersSection} from "./FiltersSection";
-import sampleData from "./sampleData";
 import {TableFooter} from "./TableFooter";
 import {TableHeader} from "./TableHeader";
 import {TableRow} from "./TableRow";
 import { FileSpreadsheet, FileText, Printer, Copy } from "lucide-react";
 import { useState } from "react";
 
-const Data = () => {
+const Data = ({title, search, sampleData, status, documentType, source, tableHeader, level, country, referredBy}) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10); 
   const [currentPage, setCurrentPage] = useState(1); 
@@ -23,9 +22,9 @@ const Data = () => {
   const paginatedData = filteredData.slice(startIndex, endIndex);
 
   return (
-    <div className="p-6 w-full bg-gray-100 min-h-screen">
+    <div className="p-6 w-full bg-gray-100 h-full">
       <div className="flex justify-between">
-        <h1 className="text-2xl font-semibold">KYC Verification</h1>
+        <h1 className="text-2xl font-semibold">{title}</h1>
         <div className="flex gap-6">
           <button className="bg-purple-600 text-white px-4 py-2 rounded-lg">
             + Filters
@@ -48,11 +47,24 @@ const Data = () => {
       </div>
 
       <div className="bg-white p-2 rounded-lg mt-2">
-        <FiltersSection searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
+        <FiltersSection 
+          {...(search ? {
+              searchQuery,
+              setSearchQuery,
+              search,
+              status,
+              documentType,
+              source
+            } : {
+              level, 
+              country, 
+              referredBy,
+            })}
+        />
 
         <div className="bg-white shadow-md rounded-lg">
           <table className="min-w-full table-fixed border-collapse">
-            <TableHeader/>
+            <TableHeader tableHeader={tableHeader}/>
             <tbody>
               {paginatedData.length > 0 ? (
                 paginatedData.map((row,index) => (

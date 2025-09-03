@@ -1,9 +1,9 @@
-import user1 from "../../assets/user1.jpg"
-import user2 from "../../assets/user2.jpg"
-import user3 from "../../assets/user3.jpg"
-import user4 from "../../assets/user4.jpg"
-import user5 from "../../assets/user5.jpg"
-import user6 from "../../assets/user6.jpg"
+import user1 from "../../../assets/user1.jpg"
+import user2 from "../../../assets/user2.jpg"
+import user3 from "../../../assets/user3.jpg"
+import user4 from "../../../assets/user4.jpg"
+import user5 from "../../../assets/user5.jpg"
+import user6 from "../../../assets/user6.jpg"
 
 const sampleData = [
   {
@@ -149,3 +149,14 @@ const sampleData = [
 ];
 
 export default sampleData;
+
+export const status = ["All", "Auto-Approved", "Approved", "Pending", "Rejected", "Expired", "On Hold", "API Failed", "Need to re-verify", "PEP/Sanctions Hit", "In Review"];
+
+export const documentType = ["All", "Passport", "National ID / Emirates ID", "Driver's License", "Residence Permit / Visa", "Utility Bill (Address)", "Bank Statement (Address)", "Selfie / Liveness", "Other"]; 
+
+export const source = ["All", "Auto (API)", "Manual", "Assisted (API + Manual)", "Resubmission", "Bulk Import"];
+
+export const tableHeader = ["checkbox", "#", "Username", "Full Name", "Country", "Document Type", "ID Number", "Source", "Submitted On", "Reviewed By", "Status", "Action"];
+
+
+
