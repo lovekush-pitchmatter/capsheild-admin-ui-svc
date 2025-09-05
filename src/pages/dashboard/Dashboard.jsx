@@ -1,10 +1,13 @@
 import React from "react";
 import Layout from "../../layout/Layout";
+import DashboardComp from "../../components/dashboard/DashboardComp";
 
 const Dashboard = () => {
   return (
     <Layout>
-      <div>Dashboard</div>
+      <div className="py-6">
+        <DashboardComp />
+      </div>
     </Layout>
   );
 };
