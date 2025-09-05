@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
 
         <Header isOpen={isOpen} />
 
-        <div className="flex flex-col justify-between h-full">
+        <div className="flex flex-col h-full">
           {children}
 
           <Footer />
