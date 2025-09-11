@@ -1,3 +1,4 @@
+import UserStatsCards from "../allUsers/UserStatsCards";
 import {FiltersSection} from "./FiltersSection";
 import {TableFooter} from "./TableFooter";
 import {TableHeader} from "./TableHeader";
@@ -5,12 +6,12 @@ import {TableRow} from "./TableRow";
 import { FileSpreadsheet, FileText, Printer, Copy } from "lucide-react";
 import { useState } from "react";
 
-const Data = ({title, search, sampleData, status, documentType, source, tableHeader, level, country, referredBy}) => {
+const Data = ({title, search, users, status, documentType, source, tableHeader, level, country, referredBy, userStateCards, interestArea, referral, tokens, investor, userStatus, kycStatus}) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10); 
   const [currentPage, setCurrentPage] = useState(1); 
 
-  const filteredData = sampleData.filter((row) =>
+  const filteredData = users.filter((row) =>
     Object.values(row).some((value) =>
       String(value).toLowerCase().includes(searchQuery.toLowerCase())
     )
@@ -21,8 +22,39 @@ const Data = ({title, search, sampleData, status, documentType, source, tableHea
   const endIndex = Math.min(startIndex + rowsPerPage, totalEntries);
   const paginatedData = filteredData.slice(startIndex, endIndex);
 
+  let filterProps = {};
+
+if (title === "All Users") {
+  filterProps = {
+    searchQuery,
+    setSearchQuery,
+    search,
+    userStatus,
+    interestArea,
+    referral,
+    tokens,
+    investor,
+    kycStatus
+  };
+} else if (search) {
+  filterProps = {
+    searchQuery,
+    setSearchQuery,
+    search,
+    status,
+    documentType,
+    source,
+  };
+} else {
+  filterProps = {
+    level,
+    country,
+    referredBy,
+  };
+}
   return (
     <div className="p-6 w-full bg-gray-100 h-full">
+
       <div className="flex justify-between">
         <h1 className="text-2xl font-semibold">{title}</h1>
         <div className="flex gap-6">
@@ -46,8 +78,12 @@ const Data = ({title, search, sampleData, status, documentType, source, tableHea
         </div>
       </div>
 
+      {      
+        userStateCards && <UserStatsCards/>
+      }
+
       <div className="bg-white p-2 rounded-lg mt-2">
-        <FiltersSection 
+        {/* <FiltersSection  
           {...(search ? {
               searchQuery,
               setSearchQuery,
@@ -55,12 +91,20 @@ const Data = ({title, search, sampleData, status, documentType, source, tableHea
               status,
               documentType,
               source
+            } : title === "All Users" ? {
+              searchQuery,
+              setSearchQuery,
+              search,
+              status,
+              documentType,
+              source,
             } : {
               level, 
               country, 
               referredBy,
-            })}
-        />
+            } )}
+        /> */}
+        <FiltersSection title={title} {...filterProps} />
 
         <div className="bg-white shadow-md rounded-lg">
           <table className="min-w-full table-fixed border-collapse">
@@ -68,7 +112,7 @@ const Data = ({title, search, sampleData, status, documentType, source, tableHea
             <tbody>
               {paginatedData.length > 0 ? (
                 paginatedData.map((row,index) => (
-                  <TableRow key={row.id} row={row} index={startIndex + index} image={row.image}/>
+                  <TableRow key={row.id} row={row} index={startIndex + index} image={row.image} title={title}/>
                 ))
               ) : (
                 <tr>
