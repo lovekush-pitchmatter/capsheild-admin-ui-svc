@@ -6,7 +6,7 @@ import {TableRow} from "./TableRow";
 import { FileSpreadsheet, FileText, Printer, Copy } from "lucide-react";
 import { useState } from "react";
 
-const Data = ({title, search, users, status, documentType, source, tableHeader, level, country, referredBy, userStateCards, interestArea, referral, tokens, investor, userStatus, kycStatus}) => {
+const Data = ({title, search, users, status, documentType, source, tableHeader, level, countryOptions, referredBy, userStateCards, interestArea, referral, tokens, investor, userStatus, kycStatus}) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10); 
   const [currentPage, setCurrentPage] = useState(1); 
@@ -48,7 +48,7 @@ if (title === "All Users") {
 } else {
   filterProps = {
     level,
-    country,
+    countryOptions,
     referredBy,
   };
 }
