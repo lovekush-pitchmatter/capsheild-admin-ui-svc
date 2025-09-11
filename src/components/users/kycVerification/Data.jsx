@@ -83,27 +83,7 @@ if (title === "All Users") {
       }
 
       <div className="bg-white p-2 rounded-lg mt-2">
-        {/* <FiltersSection  
-          {...(search ? {
-              searchQuery,
-              setSearchQuery,
-              search,
-              status,
-              documentType,
-              source
-            } : title === "All Users" ? {
-              searchQuery,
-              setSearchQuery,
-              search,
-              status,
-              documentType,
-              source,
-            } : {
-              level, 
-              country, 
-              referredBy,
-            } )}
-        /> */}
+       
         <FiltersSection title={title} {...filterProps} />
 
         <div className="bg-white shadow-md rounded-lg">

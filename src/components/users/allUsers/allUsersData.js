@@ -1,4 +1,3 @@
-import { UserMinus, UserRoundCheck, UserX } from "lucide-react"
 import user1 from "../../../assets/user1.jpg"
 import user2 from "../../../assets/user2.jpg"
 import user3 from "../../../assets/user3.jpg"

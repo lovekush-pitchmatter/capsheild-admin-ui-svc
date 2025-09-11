@@ -193,7 +193,12 @@ function StatusDropdown({ userStatus }) {
   );
 }
 
-
+const countryOptions = [
+  { value: "CA", label: "Canada" },
+  { value: "US", label: "United States" },
+  { value: "FR", label: "France" },
+  { value: "AU", label: "Australia" },
+];
 
 
 export function FiltersSection({ 
@@ -294,25 +299,9 @@ export function FiltersSection({
 
         {title === "All Users" && (
           <div className="flex gap-2">
-            {/* {userStatus.length > 0 && (
-              <select className="border rounded px-2 py-1 w-28 border-gray-400 text-gray-900 text-sm" defaultValue="Status">
-                <option value="Status" disabled hidden>Status</option>
-                {userStatus.map((s, i) => (
-                  <option key={i}>{s}</option>
-                ))}
-              </select>
-            )} */}
             {userStatus.length > 0 && <StatusDropdown userStatus={userStatus} />}
 
 
-            {/* {kycStatus.length > 0 && (
-              <select className="border rounded px-2 py-1 border-gray-400 text-gray-900 w-28 text-sm" defaultValue="KYC Status">
-                <option value="KYC Status" disabled hidden>KYC Status</option>
-                {kycStatus.map((s, i) => (
-                  <option key={i}>{s}</option>
-                ))}
-              </select>
-            )} */}
             {kycStatus.length > 0 && <KycDropdown kycStatus={kycStatus} />}
 
             {investor.length > 0 && (
