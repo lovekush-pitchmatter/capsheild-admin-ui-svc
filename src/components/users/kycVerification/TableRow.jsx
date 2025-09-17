@@ -1,15 +1,16 @@
 import { useState } from "react";
 import StatusBadge from "./StatusBadge";
-import { CircleEllipsis } from "lucide-react";
+import { CircleEllipsis, UserMinus, UserRoundCheck, UserX } from "lucide-react";
 import ReactCountryFlag from "react-country-flag";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 
-export function TableRow({ row, index, image}) {
+export function TableRow({ row, index, image, title}) {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <>
       {      
-        row.docType && <tr className="border-b hover:bg-gray-50">
-              <td className="p-2 text-gray-700"><input type="checkbox" /></td>
+        title === "KYC Verification" && <tr className="border-b hover:bg-gray-50">
+              <td className="p-2  text-gray-700"><input type="checkbox" /></td>
               <td className="p-2 text-xs text-gray-700">{index + 1}</td>
               <td className="p-2 text-xs text-gray-700">
                 {row.username}
@@ -61,7 +62,8 @@ export function TableRow({ row, index, image}) {
       }  
 
       {      
-        !row.docType && <tr className="border-b hover:bg-gray-50">
+        title === "Referral Network" &&  
+        <tr className="border-b hover:bg-gray-50">
           <td className="p-2 text-xs text-gray-700">{index + 1}</td>
           <td className="p-2 text-xs text-gray-700">
             {row.username}
@@ -116,7 +118,110 @@ export function TableRow({ row, index, image}) {
             )}
           </td>
         </tr>
-      }    
+      }  
+
+      {
+        title === "All Users" && 
+          <tr className="border-b hover:bg-gray-50">
+            <td className="p-2 text-xs text-gray-700">{index + 1}</td>
+            <td className="p-2 text-xs text-gray-700">
+              {row.username}
+            </td>
+            <td className="p-2 pe-4 text-xs text-gray-700 ">
+              <div className="flex items-center justify-start gap-1">
+                <img className="w-9 h-9 object-cover rounded-full" src={image} alt="" />
+                <div>{row.fullName}</div>
+              </div>
+            </td>
+            <td className="p-2 text-xs text-gray-700">
+              <div className="flex items-center justify-center">
+                {row.country}
+              </div>
+            </td>      
+            <td className="p-2 text-xs text-gray-700">
+              {row.referredBy}
+            </td>
+            <td className="px-4 py-2">
+              {row.email  ? <FaCheckCircle className="text-green-600"/> :  <FaTimesCircle className="text-red-600"/> }
+            </td>
+            <td className="px-4 py-2">
+              {row.mobile  ? <FaCheckCircle className="text-green-600"/> :  <FaTimesCircle className="text-red-600"/> }
+            </td>            
+            <td className="">
+              <div className="flex ">
+                  {row.status === "Active" ? (
+                    <>
+                      <div className="bg-green-600 p-1 rounded-full">                                        
+                        <UserRoundCheck className="text-white w-6 h-6" />
+                      </div>
+                    </>
+                  ) : row.status === "Pending" ? (
+                    <>
+                      <div className="bg-yellow-600 p-1 rounded-full">
+                        <UserMinus className="text-white w-6 h-6" />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="bg-red-600 p-1 rounded-full">
+                        <UserX className="text-white w-6 h-6" />
+                      </div>
+                    </>
+                  )}
+              </div>            
+            </td>
+            <td>
+              <div className="flex">
+                  {row.kyc === "Active" ? (
+                    <>
+                      <div className="bg-green-600 p-0.5 rounded-md">                                        
+                        <UserRoundCheck className="text-white w-6 h-6" />
+                      </div>
+                    </>
+                  ) : row.kyc === "Pending" ? (
+                    <>
+                      <div className="bg-blue-600 p-1 rounded-md">
+                        <UserMinus className="text-white w-6 h-6" />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="bg-red-600 p-1 rounded-md">
+                        <UserX className="text-white w-6 h-6" />
+                      </div>
+                    </>
+                  )}
+              </div>            
+            </td>
+            <td className="p-2 text-xs text-gray-700 text-center">
+              {row.joined}
+            </td>
+            <td className="p-2 cursor-pointer relative">
+              <CircleEllipsis
+                className="text-purple-600 w-full"
+                onClick={() => setMenuOpen(!menuOpen)}
+              />
+
+              {menuOpen && (
+                <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                  <ul className="py-1 text-sm text-gray-700">
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">View</li>
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Edit</li>
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Promote</li>
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Activate Ref Link</li>
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Block / Unblock</li>
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Add Fund</li>
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Debit Fund</li>
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Flag</li>
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Send Message</li>
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">View Logs</li>
+                  </ul>
+                </div>
+              )}
+            </td>
+          </tr>
+
+      }  
   
     </>
   );
