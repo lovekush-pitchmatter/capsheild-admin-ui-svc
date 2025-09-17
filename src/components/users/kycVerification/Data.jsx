@@ -87,7 +87,7 @@ if (title === "All Users") {
         <FiltersSection title={title} {...filterProps} />
 
         <div className="bg-white shadow-md rounded-lg">
-          <table className="min-w-full table-fixed border-collapse">
+          <table className="w-full table-fixed border-collapse">
             <TableHeader tableHeader={tableHeader}/>
             <tbody>
               {paginatedData.length > 0 ? (

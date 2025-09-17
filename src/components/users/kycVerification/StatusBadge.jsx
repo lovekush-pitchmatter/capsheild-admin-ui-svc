@@ -9,7 +9,7 @@ export default function StatusBadge({ status }) {
 
   return (
     <span
-      className={`px-3 py-1 rounded-full text-sm font-medium ${colors[status]}`}
+      className={`px-2 py-1 rounded-full text-sm font-medium ${colors[status]}`}
     >
       {status}
     </span>

@@ -10,7 +10,7 @@ export function TableRow({ row, index, image, title}) {
     <>
       {      
         title === "KYC Verification" && <tr className="border-b hover:bg-gray-50">
-              <td className="p-2 text-gray-700"><input type="checkbox" /></td>
+              <td className="p-2  text-gray-700"><input type="checkbox" /></td>
               <td className="p-2 text-xs text-gray-700">{index + 1}</td>
               <td className="p-2 text-xs text-gray-700">
                 {row.username}
@@ -127,14 +127,14 @@ export function TableRow({ row, index, image, title}) {
             <td className="p-2 text-xs text-gray-700">
               {row.username}
             </td>
-            <td className="p-2 pe-4 text-xs text-gray-700 w-fit ">
+            <td className="p-2 pe-4 text-xs text-gray-700 ">
               <div className="flex items-center justify-start gap-1">
                 <img className="w-9 h-9 object-cover rounded-full" src={image} alt="" />
                 <div>{row.fullName}</div>
               </div>
             </td>
             <td className="p-2 text-xs text-gray-700">
-              <div className="flex items-center">
+              <div className="flex items-center justify-center">
                 {row.country}
               </div>
             </td>      
@@ -147,8 +147,8 @@ export function TableRow({ row, index, image, title}) {
             <td className="px-4 py-2">
               {row.mobile  ? <FaCheckCircle className="text-green-600"/> :  <FaTimesCircle className="text-red-600"/> }
             </td>            
-            <td>
-              <div className="flex justify-center">
+            <td className="">
+              <div className="flex ">
                   {row.status === "Active" ? (
                     <>
                       <div className="bg-green-600 p-1 rounded-full">                                        
@@ -171,7 +171,7 @@ export function TableRow({ row, index, image, title}) {
               </div>            
             </td>
             <td>
-              <div className="flex justify-center">
+              <div className="flex">
                   {row.kyc === "Active" ? (
                     <>
                       <div className="bg-green-600 p-0.5 rounded-md">                                        
