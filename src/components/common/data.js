@@ -73,7 +73,7 @@ const data = [
       },
       {
         label: "Commissions",
-        path: "/commissions",
+        path: "/commission",
       }
     ],
   },

@@ -1,11 +1,12 @@
 import Layout from "../../layout/Layout";
 import Data from "../../components/Presale/Pending Approvals/DataTable"
-import PendingData, { documentType, status, source, HeaderRow } from "../../components/users/kycVerification/sampleData"
+import PendingData, { stage, status, network, headerRow, stats } from "../../components/Presale/Pending Approvals/PendingData"
+
 
 const PendingApprovals = () => {
   return (
     <Layout>
-      <Data title="Pending Approvals" search="Search" PendingData={PendingData} status={status} documentType={documentType} source={source} HeaderRow={HeaderRow}/>
+      < Data titles= "Pending Approvals" Data title="Pending Approvals Table" search="Search" PendingData={PendingData} stats={stats} status={status} stage={stage} network={network} headerRow={headerRow} />
     </Layout>
   );
 }

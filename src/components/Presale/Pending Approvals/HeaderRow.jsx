@@ -1,4 +1,4 @@
-export function HeaderRow({headerRow }) {
+export function HeaderRow({headerRow}) {
   return (
     <thead className="bg-gray-100 ">
       <tr>
@@ -13,14 +13,3 @@ export function HeaderRow({headerRow }) {
   );
 }
 
-// export function HeaderRow({ headerRow }) {
-//   return (
-//     <thead className="bg-gray-100">
-//       <tr>
-//         {headerRow.map((td, i) => (
-//           <th className="p-2 text-left" key={i}>{td}</th>
-//         ))}
-//       </tr>
-//     </thead>
-//   );
-// }

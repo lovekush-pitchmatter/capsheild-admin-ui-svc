@@ -1,10 +1,10 @@
-import { FiltersSection } from "./TableFilters";
-import { TableFooter } from "./PaginationFooter";
-import { HeaderRow } from "./HeaderRow";
-import { TableRow } from "./DataRow";
+import { FiltersSection } from "../Pending Approvals/TableFilters";
+import { TableFooter } from "../Commision/Footer";
+import { HeaderRow } from "../Pending Approvals/HeaderRow";
+import { TableRow } from "../Pending Approvals/DataRow";
 import { useState } from "react";
 
-const DataTable = ({ titles, title, search, PendingData, status, stage, network, headerRow, walletstatus, networktype, stats }) => {
+const DataList = ({ titles, title, search, PendingData, status, stage, network, headerRow, walletstatus, networktype, stats }) => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -110,4 +110,4 @@ const DataTable = ({ titles, title, search, PendingData, status, stage, network,
   );
 }
 
-export default DataTable;
+export default DataList;

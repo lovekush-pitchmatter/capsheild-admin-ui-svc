@@ -1,13 +1,5 @@
 import { BsSearch } from "react-icons/bs";
-import Select from "react-select";
-import ReactCountryFlag from "react-country-flag";
 
-const countryOptions = [
-  { value: "CA", label: "Canada" },
-  { value: "US", label: "United States" },
-  { value: "FR", label: "France" },
-  { value: "AU", label: "Australia" },
-];
 
 const customStyles = {
   placeholder: (provided) => ({
@@ -26,10 +18,8 @@ export function FiltersSection({
   setSearchQuery = () => {},  
   search, 
   status = [],                
-  documentType = [],          
-  source = [],
-  level = [],          
-  referredBy = [],
+  stage = [],          
+  network = [],
 }) {
   return (
     <div className="flex gap-2 items-center justify-between mb-4">
@@ -43,65 +33,23 @@ export function FiltersSection({
           </select>
         )}
 
-        {documentType.length > 0 && (
+        {stage.length > 0 && (
           <select className="border rounded px-3 py-1 border-gray-400 text-gray-900">
-            <option value="Document Type" disabled hidden>Document Type</option>
-            {documentType.map((s, i) => (
+            <option value="stage" disabled hidden>Stage</option>
+            {stage.map((s, i) => (
               <option key={i}>{s}</option>
             ))}        
           </select>
         )}        
 
-        {source.length > 0 && (
+        {network.length > 0 && (
           <select className="border rounded px-3 py-1 border-gray-400 text-gray-900">
-            <option value="Source" disabled hidden>Source</option>
-            {source.map((s, i) => (
+            <option value="network" disabled hidden>network</option>
+            {network.map((s, i) => (
               <option key={i}>{s}</option>
             ))}        
           </select>
         )}  
-
-        {level.length > 0 && (
-          <select
-            className="border rounded px-2 py-1 border-gray-400 text-gray-900"
-            defaultValue="" 
-          >
-            <option value="" disabled hidden>Level Eligible</option>
-            {level.map((s, i) => (
-              <option key={i} value={s}>{s}</option>
-            ))}
-          </select>
-        )}
-
-        <Select
-          options={countryOptions}
-          placeholder="Country"
-          styles={customStyles}
-          theme={(theme) => ({
-            ...theme,
-            colors: {
-              ...theme.colors,
-              neutral20: "black", 
-              neutral30: "black", 
-              neutral40: "black", 
-            },
-          })}
-          formatOptionLabel={(option) => (
-            <div className="flex items-center gap-2">
-              <ReactCountryFlag countryCode={option.value} svg style={{ fontSize: "1.2em" }} />
-              <span>{option.label}</span>
-            </div>
-          )}
-        />
-
-        {referredBy.length > 0 && (
-          <select className="border rounded px-3 py-1 border-gray-400 text-gray-900" defaultValue="">
-            <option value="" disabled hidden>Referred By</option>
-            {referredBy.map((s, i) => (
-              <option key={i}>{s}</option>
-            ))}
-          </select>
-        )}     
 
         {        
           search === "Search" && <input className="border rounded px-3 py-1 border-gray-400 text-gray-900" type="date" name="date" id="date" />

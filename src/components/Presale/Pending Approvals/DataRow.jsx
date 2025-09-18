@@ -1,179 +1,109 @@
-// import { useState } from "react";
-// import StatusBadge from "./StatusBadge";
-// import { CircleEllipsis } from "lucide-react";
-
-// export function TableRow({ row, index }) {
-//   const [menuOpen, setMenuOpen] = useState(false);
-
-//   return (
-//     <tr className="border-b hover:bg-gray-50">
-//       {/* Sr No */}
-//       <td className="p-2 text-xs text-gray-700">{index + 1}</td>
-
-//       Username
-//       <td className="p-2 text-xs text-gray-700">{row.username}</td>
-
-//       {/* Purchased */}
-//       <td className="p-2 text-xs text-gray-700">{row.purchased}</td>
-
-//       {/* Stage */}
-//       <td className="p-2 text-xs text-gray-700">{row.stage}</td>
-
-//       {/* Network */}
-//       <td className="p-2 text-xs text-gray-700">{row.network}</td>
-
-//       {/* Wallet Address */}
-//       <td className="p-2 text-xs text-gray-700">{row.walletAddress}</td>
-
-//       {/* Purchase Date */}
-//       <td className="p-2 text-xs text-gray-700">{row.purchaseDate}</td>
-
-//       {/* Status */}
-//       <td className="p-2 text-xs text-gray-700">
-//         <StatusBadge status={row.status} />
-//       </td>
-
-//       {/* Actions */}
-//       <td className="p-2 cursor-pointer relative">
-//         <CircleEllipsis
-//           className="text-purple-600 w-full"
-//           onClick={() => setMenuOpen(!menuOpen)}
-//         />
-//         {menuOpen && (
-//           <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-//             <ul className="py-1 text-sm text-gray-700">
-//               <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">View</li>
-//               <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Edit</li>
-//               <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Delete</li>
-//             </ul>
-//           </div>
-//         )}
-//       </td>
-//     </tr>
-//   );
-// }
-
 import { useState } from "react";
 import StatusBadge from "./StatusLabel";
 import { CircleEllipsis } from "lucide-react";
-import ReactCountryFlag from "react-country-flag";
 
-export function TableRow({ row, index, image}) {
+export function TableRow({ row, index, image }) {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  
+  const isPurchasedRow = row.purchased !== undefined;
+  const isAllocatedRow = row.allocated !== undefined;
+
   return (
     <>
-      {      
-        row.docType && <tr className="border-b hover:bg-gray-50">
-              <td className="p-2 text-gray-700"><input type="checkbox" /></td>
-              <td className="p-2 text-xs text-gray-700">{index + 1}</td>
-              <td className="p-2 text-xs text-gray-700">
-                {row.username}
-              </td>
-              <td className="p-2 pe-4 text-xs text-gray-700 w-fit ">
-                <div className="flex items-center justify-start gap-1">
-                  <img className="w-9 h-9 object-cover rounded-full" src={image} alt="" />
-                  <div>{row.fullName}</div>
-                </div>
-              </td>
-              <td className="p-2 text-xs text-gray-700">
-                <div className="flex items-center">
-                  <ReactCountryFlag
-                    countryCode={row.countryCode}   
-                    svg
-                    style={{ width: "1em", height: "1em", marginRight: "2px" }}
-                  />
-                  {row.country}
-                </div>
-              </td>      
-              <td className="p-2 text-xs text-gray-700">{row.docType}</td>
-              <td className="p-2 text-xs text-gray-700">{row.idNumber}</td>
-              <td className="p-2 text-xs text-gray-700">{row.source}</td>
-              <td className="p-2 text-xs text-gray-700">{row.submittedOn}</td>
-              <td className="p-2 text-xs text-gray-700">{row.reviewedBy}</td>
-              <td className="p-2 text-xs text-gray-700 whitespace-nowrap"><StatusBadge status={row.status} /></td>
-              <td className="p-2 cursor-pointer relative">
-                <CircleEllipsis
-                  className="text-purple- w-full"
-                  onClick={() => setMenuOpen(!menuOpen)}
-                />
-
-                {menuOpen && (
-                  <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                    <ul className="py-1 text-sm text-gray-700">
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">View Details</li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Approve</li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Reject</li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Request re-submit</li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Put on hold</li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Assign reviewer</li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Download docs (zip)</li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Audit log</li>
-                    </ul>
-                  </div>
-                )}
-              </td>
-        </tr>
-      }  
-
-      {      
-        !row.docType && <tr className="border-b hover:bg-gray-50">
+      {isPurchasedRow ? (
+        <tr className="border-b hover:bg-gray-50">
           <td className="p-2 text-xs text-gray-700">{index + 1}</td>
-          <td className="p-2 text-xs text-gray-700">
-            {row.username}
-          </td>
-          <td className="p-2 pe-4 text-xs text-gray-700 w-fit ">
-            <div className="flex items-center justify-start gap-1">
-              <img className="w-9 h-9 object-cover rounded-full" src={image} alt="" />
-              <div>{row.fullName}</div>
-            </div>
-          </td>
-          <td className="p-2 text-xs text-gray-700">
-            <div className="flex items-center">
-              <ReactCountryFlag
-                countryCode={row.countryCode}   
-                svg
-                style={{ width: "1em", height: "1em", marginRight: "2px" }}
-              />
-              {row.country}
-            </div>
-          </td>      
-          <td className="p-2 text-xs text-gray-700">
-            {row.referredBy}
-          </td>
-          <td className="p-2 text-xs text-gray-700">
-            {row.uplineL2}
-          </td>
-          <td className="p-2 text-xs text-gray-700">
-            {row.uplineL3}
-          </td>
-          <td className="p-2 text-xs text-gray-700">
-            {row.levelEligible}
-          </td>
-          <td className="p-2 text-xs text-gray-700 text-center">
-            {row.referrals}
+          <td className="p-2 text-xs text-gray-700">{row.username}</td>
+          <td className="p-2 text-xs text-gray-700">{row.purchased}</td>
+          <td className="p-2 text-xs text-gray-700">{row.stage}</td>
+          <td className="p-2 text-xs text-gray-700">{row.network}</td>
+          <td className="p-2 text-xs text-gray-700">{row.walletAddress}</td>
+          <td className="p-2 text-xs text-gray-700">{row.purchasedDate}</td>
+          <td className="p-2 text-xs text-gray-700 whitespace-nowrap">
+            <StatusBadge status={row.status} />
           </td>
           <td className="p-2 cursor-pointer relative">
             <CircleEllipsis
               className="text-purple-600 w-full"
               onClick={() => setMenuOpen(!menuOpen)}
             />
-
             {menuOpen && (
               <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-50">
                 <ul className="py-1 text-sm text-gray-700">
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Profile</li>
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Downline</li>
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Upline</li>
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Level History</li>
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Notes</li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Approve Allocation</li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Reject Request</li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Request Wallet Address</li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Verify Payment</li>
                 </ul>
               </div>
             )}
           </td>
         </tr>
-      }    
-  
+      ) : isAllocatedRow ? (
+        <tr className="border-b hover:bg-gray-50">
+          <td className="p-2 text-xs text-gray-700">{index + 1}</td>
+          <td className="p-2 text-xs text-gray-700">{row.username}</td>
+          <td className="p-2 text-xs text-gray-700">{row.allocated}</td>
+          <td className="p-2 text-xs text-gray-700">{row.walletAddress}</td>
+          <td className="p-2 text-xs text-gray-700">{row.network}</td>
+          <td className="p-2 text-xs text-gray-700">{row.purchasedDate}</td>
+          <td className="p-2 text-xs text-gray-700 whitespace-nowrap">
+            <StatusBadge status={row.status} />
+          </td>
+          <td className="p-2 cursor-pointer relative">
+            <CircleEllipsis
+              className="text-purple-600 w-full"
+              onClick={() => setMenuOpen(!menuOpen)}
+            />
+            {menuOpen && (
+              <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                <ul className="py-1 text-sm text-gray-700">
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">View Allocation Details</li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Approve Allocation</li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Reject Allocation</li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Adjust Token Allocation</li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Request Wallet Address</li>
+                </ul>
+              </div>
+            )}
+          </td>
+        </tr>
+      ) : (
+        <tr className="border-b hover:bg-gray-50">
+          <td className="p-2 text-xs text-gray-700">{index + 1}</td>
+          <td className="p-2 text-xs text-gray-700">{row.username}</td>
+          <td className="p-2 text-xs text-gray-700">{row.level}</td>
+          <td className="p-2 text-xs text-gray-700">{row.investor}</td>
+          <td className="p-2 text-xs text-gray-700">{row.invested}</td>
+          <td className="p-2 text-xs text-gray-700">{row.currency}</td>
+          <td className="p-2 text-xs text-gray-700">{row.commision}</td> 
+          <td className="p-2 text-xs text-gray-700 whitespace-nowrap">
+            <StatusBadge status={row.status} />
+          </td>
+          <td className="p-2 text-xs text-gray-700">{row.creditwallet}</td> 
+          <td className="p-2 cursor-pointer relative">
+            <CircleEllipsis
+              className="text-purple-600 w-full"
+              onClick={() => setMenuOpen(!menuOpen)}
+            />
+            {menuOpen && (
+              <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                <ul className="py-1 text-sm text-gray-700">
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">View Details</li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Approve Commission</li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Reject Commmission</li>
+                </ul>
+              </div>
+            )}
+          </td>
+        </tr>
+
+      )}
     </>
   );
 }
+
+
+
 
