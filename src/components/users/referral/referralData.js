@@ -62,7 +62,13 @@ export default sampleData;
 
 export const levelEligible = ["All Levels", "Level 1", "Level 2", "Level 3"];
 
-export const country = ["Canada", "United States", "France", "Australia"]; 
+export const countryOptions = [
+  { value: "CA", label: "Canada" },
+  { value: "US", label: "United States" },
+  { value: "FR", label: "France" },
+  { value: "AU", label: "Australia" },
+];
+
 
 export const referredBy = ["capxhunter", "cryptoqueen", "investhunter", "angelvision"];
 
