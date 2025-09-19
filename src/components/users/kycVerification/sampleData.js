@@ -4,6 +4,7 @@ import user3 from "../../../assets/user3.jpg"
 import user4 from "../../../assets/user4.jpg"
 import user5 from "../../../assets/user5.jpg"
 import user6 from "../../../assets/user6.jpg"
+// import sampleData from "../referral/referralData"
 
 const sampleData = [
   {
@@ -157,6 +158,7 @@ export const documentType = ["All", "Passport", "National ID / Emirates ID", "Dr
 export const source = ["All", "Auto (API)", "Manual", "Assisted (API + Manual)", "Resubmission", "Bulk Import"];
 
 export const tableHeader = ["checkbox", "#", "Username", "Full Name", "Country", "Document Type", "ID Number", "Source", "Submitted On", "Reviewed By", "Status", "Action"];
+
 
 
 

@@ -1,1 +1,1018 @@
- @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
+
+html,body {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+.roboto-font {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+.text {
+  @apply text-[#5D40ED];
+}
+.bg {
+  @apply bg-[#5D40ED];
+}
+.sidebar {
+  width: 260px;
+  background-color: #fff;
+  padding: 24px 0; /* Adjusted padding */
+  border-right: 1px solid #e5e7eb; /* Light gray border */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.02); /* Subtle shadow */
+  display: flex;
+  flex-direction: column;
+  position: sticky; /* Keep sidebar fixed */
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar .logo {
+  font-size: 28px; /* Slightly larger font for Pitchmatter */
+  font-weight: 700;
+  margin-bottom: 32px;
+  text-align: left;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  font-family: 'Inter', sans-serif; /* Ensure Inter font is applied */
+}
+
+.sidebar .logo .pitch {
+  color: #1f2937; /* Darker color for 'Pitch' */
+}
+
+.sidebar .logo .matter {
+  color: var(--color-primary); /* Primary color for 'matter' */
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0 16px; /* Padding for navigation */
+}
+
+.sidebar nav ul li {
+  margin-bottom: 4px; /* Spacing between menu items */
+}
+
+.sidebar nav ul li a {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px; /* Padding for menu links */
+  color: #4b5563; /* text-gray-700 */
+  text-decoration: none;
+  border-radius: 8px; /* Rounded corners for active/hover */
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar nav ul li a:hover {
+  background-color: #e5e7eb; /* hover:bg-gray-100 */
+  color: #1f2937; /* hover:text-gray-900 */
+}
+
+.sidebar nav ul li a.active {
+  background-color: var(--color-primary); /* Primary color for active link */
+  color: #fff;
+}
+
+.sidebar nav ul li a.active svg {
+  color: #fff;
+}
+
+.sidebar nav ul li a svg {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  color: #6b7280; /* icon-gray-500 */
+}
+
+.sidebar nav ul li.menu-header {
+  font-size: 10px;
+  color: #9ca3af; /* text-gray-400 */
+  margin-top: 24px; /* More space above headers */
+  margin-bottom: 8px; /* Space below headers */
+  padding: 0 16px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff; /* Ensure main content has a white background */
+}
+
+.flex-grow-content {
+  flex-grow: 1;
+}
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px; /* Padding for top header */
+  background-color: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+  border-radius: 12px; /* Rounded corners */
+  margin-bottom: 24px;
+}
+
+.top-header .search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #f3f4f6; /* Light gray background for search bar */
+  border-radius: 24px;
+  padding: 6px 16px; /* Padding for search bar container */
+  width: 400px; /* Wider search bar */
+}
+
+.top-header .search-bar .menu-top-bar {
+  width: 22px;
+  height: 22px;
+  color: #4b5563; /* icon-gray-700 */
+  cursor: pointer;
+  margin-right: 8px; /* Space between hamburger and search input wrapper */
+}
+
+.top-header .search-input-wrapper {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  gap: 8px; /* Space between search icon and input */
+  background-color: #e5e7eb; /* Background for the input field */
+  border-radius: 24px; /* Match outer search bar radius */
+  padding: 0 10px; /* Padding inside the input wrapper */
+}
+
+.top-header .search-input-wrapper input {
+  flex-grow: 1;
+  padding: 4px 0;
+  border: none;
+  font-size: 14px;
+  background-color: transparent;
+  outline: none;
+  color: #374151; /* text-gray-700 */
+}
+
+.top-header .search-input-wrapper input::placeholder {
+  color: #9ca3af; /* placeholder-gray-400 */
+}
+
+.top-header .search-input-wrapper svg {
+  width: 20px;
+  height: 20px;
+  color: #9ca3af; /* icon-gray-400 */
+  cursor: pointer;
+}
+
+.top-nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 18px; /* Spacing between icons */
+}
+
+.top-nav-icons .icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+}
+
+.top-nav-icons .icon-wrapper:hover {
+  background-color: #f3f4f6;
+}
+
+.top-nav-icons svg {
+  width: 22px;
+  height: 22px;
+  color: #4b5563; /* icon-gray-700 */
+  cursor: pointer;
+}
+
+.top-nav-icons .country-flag-top-nav {
+  width: 24px;
+  height: auto;
+  border-radius: 4px; /* Slightly rounded flag */
+  border: 1px solid #e5e7eb;
+  object-fit: cover; /* Ensure flag fills space without distortion */
+}
+
+.top-nav-icons .user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 10px; /* Space from last icon */
+}
+
+.top-nav-icons .user-profile .profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #d1d5db; /* Light border */
+}
+
+.top-nav-icons .user-profile > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.top-nav-icons .user-profile span {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1f2937; /* text-gray-900 */
+}
+
+.top-nav-icons .user-profile p {
+  font-size: 12px;
+  color: #6b7280; /* text-gray-500 */
+}
+
+/* Main Content - All Users Page */
+.all-users-page {
+  background-color: #f9fafb; /* Set to light grey to match desired UI whitespace */
+  border-radius: 12px; /* Rounded corners for the entire page content */
+ 
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+  flex-grow: 1; /* Allow it to take up available space */
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  background-color: #fff; /* Ensure header has a white background */
+  border-radius: 12px; /* Add border-radius to match overall box styling */
+  padding: 12px 24px; /* Add padding for header content */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+}
+
+.header h1 {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 700; /* Bold */
+  color: #111827; /* Gray-900 */
+  margin-bottom: 4px; /* 4px */
+}
+
+.header p {
+  font-size: 0.875rem; /* 14px */
+  color: #6b7280; /* Gray-500 */
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center; 
+}
+
+
+.export-icon {
+  color: #fff; /* White icon */
+}
+
+/* Controls (Bulk Action, Apply, Search, Menu, Settings) */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  background-color: #fff; /* White background for the controls bar */
+  padding: 12px 24px; /* Padding for the controls bar */
+  border-radius: 12px; /* Rounded corners for the controls bar */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+}
+
+.controls .custom-dropdown .dropdown-toggle {
+  background-color: #fff; /* White background for dropdown toggle */
+  border: 1px solid #d1d5db; /* Light gray border */
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between; /* Space between text and arrow */
+  align-items: center;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.dropdown-arrow {
+  margin-left: auto; /* Push arrow to the right */
+  width: 1rem; /* 16px */
+  height: 1rem; /* 16px */
+  color: #6b7280; /* Gray-500 */
+}
+
+.controls .apply-button {
+  background-color: var(--color-primary) !important; /* Use primary color */
+  color: var(--color-lilac) !important; /* Lilac text */
+  border: none !important;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+}
+
+.controls .apply-button:hover {
+  background-color: #4f46e5 !important; /* Darker primary color on hover */
+  color: var(--color-lilac) !important; /* Keep lilac text */
+}
+
+.controls .control-icon {
+  color: #6b7280; /* Gray-500 */
+  width: 1.25rem; /* 20px */
+  height: 1.25rem; /* 20px */
+  cursor: pointer;
+}
+
+.controls .control-icon:hover {
+  color: #4b5563; /* Gray-600 */
+}
+
+/* Users Table */
+.users-table {
+  background-color: #fff; /* Ensure table has a white background */
+  border-radius: 12px; /* Rounded corners for the entire table container */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+  overflow-x: auto; /* Ensures horizontal scrolling for the table */
+  margin-bottom: 24px; /* Space below the table */
+}
+
+.users-table table {
+  width: 100%;
+  border-collapse: separate; /* Allow border-radius on table elements */
+  border-spacing: 0;
+}
+
+.users-table th,
+.users-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb; /* Light gray border for rows */
+}
+
+.users-table thead th {
+  background-color: #6366f1; /* Purple background for header */
+  color: #fff; /* White text */
+  font-weight: 600; /* Semibold */
+  font-size: 0.875rem; /* 14px */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.users-table thead tr th:first-child {
+  border-top-left-radius: 12px; /* Match container radius */
+}
+
+.users-table thead tr th:last-child {
+  border-top-right-radius: 12px; /* Match container radius */
+}
+
+.users-table tbody tr {
+  background-color: #fff; /* Default white background for rows */
+}
+
+.users-table tbody tr.table-row-even {
+  background-color: #f9fafb; /* Light gray for even rows */
+}
+
+.users-table tbody tr:hover {
+  background-color: #f3f4f6; /* Lighter gray on hover */
+}
+
+.users-table td:first-child {
+  border-left: none; /* No left border on first column */
+}
+
+.users-table td:last-child {
+  border-right: none; /* No right border on last column */
+}
+
+.users-table td.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.users-table td img.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e0e0; /* Light gray placeholder */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #757575;
+}
+
+.users-table td .user-info p:first-child {
+  font-weight: 600;
+  color: #1f2937; /* Dark gray */
+}
+
+.users-table td .user-info p:last-child {
+  font-size: 0.875rem; /* 14px */
+  color: #6b7280; /* Gray-500 */
+}
+
+.country-flag {
+  width: 24px;
+  height: auto;
+  border-radius: 4px; /* Slightly rounded flag */
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 9999px; /* Fully rounded pill shape */
+  font-size: 0.75rem; /* 12px */
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-completed {
+  background-color: #d1fae5; /* Green-100 */
+  color: #065f46; /* Green-800 */
+}
+
+.status-pending {
+  background-color: #fffbeb; /* Yellow-100 */
+  color: #92400e; /* Yellow-800 */
+}
+
+.status-failed {
+  background-color: #fee2e2; /* Red-100 */
+  color: #991b1b; /* Red-800 */
+}
+
+/* Verified Status */
+.verified-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.875rem; /* 14px */
+  color: #4b5563; /* Gray-700 */
+  margin-bottom: 4px; /* Space between Email and KYC */
+}
+
+.verified-status:last-child {
+  margin-bottom: 0;
+}
+
+.verified-status .lucide-icon {
+  width: 1rem; /* 16px */
+  height: 1rem; /* 16px */
+}
+
+.verified-status .check-icon {
+  color: #10b981; /* Green-500 */
+}
+
+.verified-status .info-icon {
+  color: #f59e0b; /* Amber-500 */
+}
+
+.verified-status .x-icon {
+  color: #ef4444; /* Red-500 */
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  background-color: #fff; /* White background for pagination bar */
+  padding: 12px 24px; /* Padding for pagination bar */
+  border-radius: 12px; /* Rounded corners for pagination bar */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+  margin-top: 24px; /* Space above pagination */
+}
+
+.pagination span {
+  font-size: 0.875rem; /* 14px */
+  color: #4b5563; /* Gray-700 */
+}
+
+.pagination .custom-dropdown .dropdown-toggle {
+  background-color: #f3f4f6; /* Light gray background for dropdown toggle */
+  border: 1px solid #d1d5db; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 6px 10px; /* Adjusted padding */
+  font-size: 0.875rem; /* 14px */
+  color: #374151; /* Text color */
+}
+
+.pagination button {
+  background-color: #f3f4f6; /* Light gray background */
+  color: #4b5563; /* Gray-700 */
+  border: 1px solid #d1d5db; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.pagination button:hover {
+  background-color: #e5e7eb; /* Lighter gray on hover */
+  border-color: #9ca3af; /* Darker border on hover */
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.pagination .lucide-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.text-green-600 {
+  color: #16a34a; /* Tailwind's green-600 */
+}
+
+.text-red-600 {
+  color: #dc2626; /* Tailwind's red-600 */
+}
+
+.text-purple-600 {
+  color: #9333ea; /* Tailwind's purple-600 */
+}
+
+/* App.tsx related styles */
+.pitchmatter-text {
+  font-weight: 600; /* Semibold */
+  font-size: 1.125rem; /* 18px */
+  color: #111827; /* Gray-900 */
+}
+
+.search-input {
+  border: 1px solid #e5e7eb; /* Gray-200 */
+  border-radius: 0.375rem; /* 6px */
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem; /* 14px */
+  color: #374151; /* Gray-700 */
+  width: 100%;
+  max-width: 20rem; /* Adjust as needed */
+}
+
+.search-input::placeholder {
+  color: #9ca3af; /* Gray-400 */
+}
+
+.top-nav-icons .lucide-icon {
+  color: #6b7280; /* Gray-500 */
+  width: 1.25rem; /* 20px */
+  height: 1.25rem; /* 20px */
+  cursor: pointer;
+}
+
+.top-nav-icons .lucide-icon:hover {
+  color: #4b5563; /* Gray-600 */
+}
+
+.footer {
+  margin-top: auto; /* Push footer to the bottom */
+  padding: 16px 24px; /* Adjust padding as needed, match main-content horizontal padding */
+  text-align: left; /* Align text to the left as per image */
+  color: #6b7280; /* Gray-500 */
+  font-size: 0.75rem; /* 12px */
+  border-top: 1px solid #e5e7eb; /* Light gray border */
+  background-color: #f9fafb; /* Match body background */
+  width: 100%; /* Ensure it spans full width of main-content */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.footer-text {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Dropdown Styles */
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%; /* Ensure dropdown takes full width of its grid column */
+}
+
+.dropdown-container {
+  position: relative; /* Crucial for absolute positioning of the menu */
+  width: 100%; /* Ensure it takes the full width of its parent grid column */
+}
+
+.dropdown-toggle {
+  background-color: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between; /* Space between text and arrow */
+  align-items: center;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.dropdown-toggle svg {
+  width: 16px;
+  height: 16px;
+  color: #6b7280; /* text-gray-500 */
+  margin-left: auto; /* Push arrow to the right */
+}
+
+.dropdown-single-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-flag-icon {
+  width: 20px; /* Adjust size as needed */
+  height: 14px; /* Adjust height to maintain aspect ratio */
+  border-radius: 2px; /* Slightly rounded corners for the flag */
+  object-fit: cover;
+  display: inline-block; /* Ensure it renders inline with text */
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  border-radius: 8px;
+  top: calc(100% + 8px);
+  left: 0; /* Anchor to the left */
+  right: auto; /* Prevent stretching to the right boundary */
+  width: max-content; /* Make width adapt to content */
+  min-width: 100%; /* Ensure it's at least as wide as the toggle */
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #d1d5db;
+  list-style: none;
+  padding: 8px 0;
+}
+
+.dropdown-container.open .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li {
+  padding: 10px 16px;
+  cursor: pointer;
+  color: #1f2937; /* Dark text for options */
+  transition: background-color 0.2s ease;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.dropdown-menu li:hover {
+  background-color: #f3f4f6; /* Light gray on hover */
+}
+
+.dropdown-menu li.selected {
+  background-color: #e0e7ff; /* Light indigo for selected item */
+  color: #4338ca; /* Darker indigo for selected item text */
+}
+
+/* User Details Page */
+.user-details-page {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 24px;
+  width: 100%;
+  background-color: #f9fafb; /* Light grey background for the page */
+  padding-bottom: 48px; /* Add extra space at the bottom */
+}
+
+.user-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 16px 24px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+}
+
+.user-title-section h1 {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+  color: #111827; /* Gray-900 */
+  margin-bottom: 4px;
+}
+
+.user-meta {
+  font-size: 0.875rem; /* 14px */
+  color: #6b7280; /* Gray-500 */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.user-meta-dot {
+  /* Removed dot styling */
+  display: none; /* Hide the dots */
+}
+
+.user-details-tabs {
+  display: flex;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+  align-items: center; /* Ensure items are vertically aligned */
+  position: relative; /* Added for absolute positioning context */
+}
+
+.tab-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 0.875rem; /* 14px */
+  font-weight: 500;
+  color: #6b7280; /* Gray-500 for inactive text */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  position: relative; /* Needed for the ::after pseudo-element underline */
+  background-color: transparent !important; /* Ensure no background color on the tab item */
+  margin-right: 8px; /* Add spacing between tab items */
+}
+
+/* Styling for the SVG icon within the tab item */
+.tab-item svg,
+.tab-item svg path,
+.tab-item svg circle {
+  width: 16px;
+  height: 16px;
+  color: #6b7280 !important; /* Gray-500 for inactive icon */
+  fill: none !important; /* Ensure no fill, just stroke */
+  stroke: currentColor !important;
+  display: block !important; /* Ensure SVG behaves as a block element */
+  flex-shrink: 0; /* Prevent shrinking in flex container */
+}
+
+.tab-item.active {
+  background-color: transparent !important; /* Ensure no background fill for the active tab item itself */
+  color: #7c3aed; /* Purple color for active text */
+}
+
+/* Styling for the SVG icon when the tab is active */
+.tab-item.active svg,
+.tab-item.active svg path,
+.tab-item.active svg circle {
+  color: #7c3aed !important; /* Purple color for active icon */
+  fill: none !important; /* Ensure no fill, just stroke */
+  stroke: currentColor !important;
+}
+
+/* Underline for Active Tab */
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -8px; /* Adjust this value to control distance from text */
+  left: 0;
+  width: 100%;
+  height: 2px; /* Thickness of the underline */
+  background-color: #7c3aed; /* Purple color for the underline */
+}
+
+/* Styling for the new User icon in the tab bar */
+.user-details-tabs .ml-auto svg {
+  color: #6b7280; /* Gray-500 */
+  stroke-width: 1.5; /* Match stroke-width of other icons if needed */
+  fill: none; /* Ensure it's an outline */
+  width: 20px; /* Adjust size if needed */
+  height: 20px; /* Adjust size if needed */
+}
+
+.personal-info-section {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.section-header h2 {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 12px; /* Increased space after title */
+}
+
+.section-description {
+  font-size: 0.875rem; /* 14px */
+  color: #6b7280;
+  margin-bottom: 24px; /* Added space after description */
+}
+
+.profile-visibility {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Custom Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 22px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 22px; /* Rounded slider */
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%; /* Rounded knob */
+}
+
+input:checked + .slider {
+  background-color: #4f46e5; /* Indigo-600 */
+}
+
+input:checked + .slider:before {
+  transform: translateX(16px);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  gap: 20px;
+}
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Space between label and input */
+}
+
+.phone-input-container {
+  display: flex;
+  gap: 8px;
+}
+
+.phone-input-container .dropdown-container {
+  flex-shrink: 0;
+  width: 80px; /* Adjust as needed */
+}
+
+.phone-input-container .input-wrapper {
+  flex-grow: 1;
+}
+
+.input-label {
+  font-size: 0.875rem; /* 14px */
+  font-weight: 500;
+  color: #374151; /* Gray-700 */
+}
+
+.full-width-field {
+  grid-column: 1 / -1; /* Spans across all columns in the grid */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.textarea-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #d1d5db; /* Gray-300 */
+  border-radius: 8px;
+  font-size: 1rem; /* 16px */
+  color: #111827;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 80px;
+}
+
+.textarea-input:focus {
+  outline: none;
+  border-color: #4f46e5; /* Indigo-600 */
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Multi-select tag styling within Dropdown */
+.dropdown-selected-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px; /* Space between input and tags */
+}
+
+.dropdown-tag {
+  display: flex;
+  align-items: center;
+  background-color: #e0e7ff; /* Indigo-100 */
+  color: #4338ca; /* Indigo-700 */
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem; /* 12px */
+  font-weight: 500;
+}
+
+.dropdown-tag-remove {
+  margin-left: 6px;
+  cursor: pointer;
+  color: #6366f1; /* Indigo-500 */
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.75rem;
+}
+
+/* Adjustments for Dropdown to accommodate multi-select */
+.dropdown-container.multi-select .dropdown-header {
+  min-height: 40px; /* Ensure enough height for tags */
+  align-items: flex-start; /* Align header content to top */
+  padding-top: 8px; /* Adjust padding for tags */
+  padding-bottom: 8px;
+}
+
+.dropdown-container.multi-select .dropdown-header-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: 100%;
+}
+
+.dropdown-container.multi-select .dropdown-placeholder {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 14px;
+}
+
+.dropdown-container.multi-select.has-value .dropdown-placeholder {
+  display: none;
+}
+
+.user-name-purple {
+  color: #7c3aed; /* A shade of purple */
+}
+
+/* Placeholder text size */
+::placeholder {
+  font-size: 0.875rem; /* Smaller placeholder text (14px) */
+}
