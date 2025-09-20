@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import KYCVerification from "./pages/users/kycVerification/KYCVerification";
 import Referral from "./pages/users/referral/Referral";
 import AllUsers from "./pages/users/allUsers/AllUsers";
+import Presale from "./pages/presale/Presale";
 
 
  
@@ -15,6 +16,7 @@ const  App=()=> {
         <Route path="/kyc-verification" element={<KYCVerification/>} />
         <Route path="/referrals-uplines" element={<Referral/>} />
         <Route path="/all-users" element={<AllUsers/>} />
+        <Route path="/presale" element={<Presale/>} />
       </Routes>
     </Router>
   );
