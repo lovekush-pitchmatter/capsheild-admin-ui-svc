@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/dashboard/Dashboard";
 import KYCVerification from "./pages/users/kycVerification/KYCVerification";
 import Referral from "./pages/users/referral/Referral";
+import AllUsers from "./pages/users/allUsers/AllUsers";
+import Presale from "./pages/presale/Presale";
 // import AllUsers from "./pages/users/allUsers/AllUsers";
 // import Dashboard from "./pages/dashboard/Dashboard";
 // import KYCVerification from "./pages/kycVerification/KYCVerification";
@@ -26,13 +28,13 @@ const  App=()=> {
         <Route path="/pendingapprovals" element={<PendingApprovals/>} />
         <Route path ="/walletallocation" element={<WalletAllocation/>} />
         <Route path="/commission" element={<Commision/>} />
-{/* 
+        {/* 
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/kyc-verification" element={<KYCVerification/>} />
         <Route path="/referrals-uplines" element={<Referral/>} />
         <Route path="/all-users" element={<AllUsers/>} />
+        <Route path="/presale" element={<Presale/>} />
         <Route path="/" element={<UserProfile />} /> */}
-
       </Routes>
     </Router>
   );
