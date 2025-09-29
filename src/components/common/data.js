@@ -53,10 +53,29 @@ const data = [
     icon: "MdShare",
     path: "/referrals",
   },
+  // {
+  //   label: "Presale",
+  //   icon: "MdAttachMoney",
+  //   path: "/presale",
+  // },
   {
     label: "Presale",
-    icon: "MdAttachMoney",
+    icon: "MdSale",
     path: "/presale",
+    children: [
+      {
+        label: "Pending Approvals",
+        path: "/pendingapprovals",
+      },
+      {
+        label: "Wallet Allocation",
+        path: "/walletallocation",
+      },
+      {
+        label: "Commissions",
+        path: "/commission",
+      }
+    ],
   },
   {
     label: "Widgets",
