@@ -13,7 +13,8 @@ import PendingApprovals from "./pages/Pending Approvals/PendingApprovals";
 import WalletAllocation from "./pages/Wallet Allocation/WalletAllocation";
 import Commision from "./pages/Commision/Commision";
 
-// import UserProfile from "./pages/Profile/UserProfile"
+import UserProfile from "./pages/Profile/UserProfile"
+import ManualDeposits from "./pages/Deposits/ManualDeposit"
 
 
 const  App=()=> {
@@ -30,11 +31,14 @@ const  App=()=> {
         <Route path="/commission" element={<Commision/>} />
         {/* 
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/kyc-verification" element={<KYCVerification/>} />
         <Route path="/referrals-uplines" element={<Referral/>} />
         <Route path="/all-users" element={<AllUsers/>} />
         <Route path="/presale" element={<Presale/>} />
         <Route path="/" element={<UserProfile />} /> */}
+        <Route path="/all-users" element={<AllUsers/>} />
+         <Route path="/" element={<UserProfile />} /> 
+         <Route path="/presale" element={<Presale/>} />
+         <Route path ="/manual-deposit-entry" element={<ManualDeposits/>} />
       </Routes>
     </Router>
   );
